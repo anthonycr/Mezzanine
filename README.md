@@ -26,7 +26,7 @@ public interface MyFileReader {
 
 ...
 
-MyFileReader fileReader = Mezzanine.Generator_MyFileReader();
+MyFileReader fileReader = new Mezzanine.Generator_MyFileReader();
 
 String fileContents = fileReader.readMyFile();
 ```
