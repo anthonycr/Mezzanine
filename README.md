@@ -1,5 +1,5 @@
 # Mezzanine
-An Android annotation processor that reads files at compile time
+An Android annotation processor that reads UTF-8 files at compile time
 
 ### What does this do?
 A frequent scenario for Android apps is to need to read in a default configuration file on startup and change functionality based on the contents of the configuration file. A convenient way to store this configuration file is is assets, and then to read this file out of assets on startup. This can mean doing expensive disk I/O on the main thread... which is bad.
@@ -11,6 +11,7 @@ Mezzanine tries to solve this problem by storing file contents in a String, whic
 - Create an `interface` with one method with no parameters and a return type of `String`
 - Annotate that single method with `@FileStream` and pass the path to the file as the value in the annotation.
 - Consume the generated implementation of the interface to get the file as a string.
+- Files are assumed to be encoded as `UTF-8`.
 
 ### Sample
 ```Java
