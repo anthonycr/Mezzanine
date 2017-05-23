@@ -6,6 +6,8 @@ A frequent scenario for Android apps is to need to read in a default configurati
 
 Mezzanine tries to solve this problem by storing file contents in a String, which is loaded when the APK and class is loaded, rather than requiring additional disk I/O after startup. It acts as an intermediary between files and your Java code. This library is ideal for small files.
 
+Of course, you may already be copying the contents of a file into a String and then reading it at runtime for the performance gain, but this can be a nuisance to maintain. Using Mezzanine, you don't have to worry about escaping the string contents or losing formatting when pasting into the Java class. You can edit in the file, and then read from the method at runtime.
+
 ### API
 - `@FileStream(String path)`: the path to the file relative to the project root
 - Create an `interface` with one method with no parameters and a return type of `String`
