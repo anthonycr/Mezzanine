@@ -1,5 +1,6 @@
 package com.anthonycr.mezzanine;
 
+import com.anthonycr.mezzanine.utils.MessagerUtils;
 import com.anthonycr.mezzanine.utils.Preconditions;
 import com.google.common.base.Charsets;
 
@@ -69,6 +70,9 @@ public class MezzanineMapper {
             String absoluteFilePath = currentRelativePath.toAbsolutePath() + prependSlashIfNecessary(filePath);
             File file = new File(absoluteFilePath);
 
+            if (!file.exists()) {
+                MessagerUtils.reportError(element, "File does not exist");
+            }
 
             return new MezzanineEntry<>((TypeElement) enclosingElement, file);
         };
