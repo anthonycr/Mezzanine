@@ -8,6 +8,14 @@ Mezzanine solves this problem by storing file contents in a `String` constant, w
 
 Of course, you may already be copying the contents of a file into a `String` and then reading it at runtime for the performance gain, but this can be a nuisance to maintain. Using Mezzanine, you don't have to worry about escaping the `String` contents or losing formatting. You can edit in the file, and then read from the method at runtime.
 
+### How to use
+
+##### Android
+```groovy
+compile project(':mezzanine')
+annotationProcessor project(':mezzanine-compiler')
+```
+
 ### API
 - `@FileStream(String path)`: the path to the file relative to the project root
 - Create an `interface` with one method with no parameters and a return type of `String`
