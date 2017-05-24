@@ -1,5 +1,5 @@
 # Mezzanine
-An Android annotation processor that reads UTF-8 files at compile time
+A Java annotation processor that reads UTF-8 files at compile time.
 
 ### What does this do?
 A frequent scenario for Android apps is to need to read in a default configuration file on startup and change functionality based on the contents of the configuration file. A convenient way to store this configuration file is is assets, and then to read this file out of assets on startup. This can mean doing expensive disk I/O on the main thread... which is bad.
