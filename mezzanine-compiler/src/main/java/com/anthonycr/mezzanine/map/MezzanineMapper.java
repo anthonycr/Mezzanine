@@ -20,6 +20,10 @@ import javax.lang.model.element.TypeElement;
 import io.reactivex.functions.Function;
 
 /**
+ * A set of mapping functions used to transform
+ * a stream of supported elements into a usable
+ * stream of components to build the file providers.
+ * <p>
  * Created by anthonycr on 5/22/17.
  */
 public final class MezzanineMapper {
@@ -31,6 +35,14 @@ public final class MezzanineMapper {
         return (path.startsWith("/") ? "" : "/") + path;
     }
 
+    /**
+     * A mapping function that takes a stream of
+     * supported elements (methods) and maps them
+     * to their enclosing interfaces and the files
+     * represented by the method annotations.
+     *
+     * @return a valid mapping function.
+     */
     @NotNull
     public static Function<Element, Map.Entry<TypeElement, File>> elementToTypeAndFilePair() {
         return element -> {
@@ -56,6 +68,14 @@ public final class MezzanineMapper {
         };
     }
 
+    /**
+     * A mapping function that takes a stream of
+     * interfaces and files and reads in the file,
+     * emitting an stream of interfaces and file
+     * contents (as strings).
+     *
+     * @return a valid mapping function.
+     */
     @NotNull
     public static Function<Map.Entry<TypeElement, File>, Map.Entry<TypeElement, String>> fileToStringContents() {
         return typeElementFileEntry -> {

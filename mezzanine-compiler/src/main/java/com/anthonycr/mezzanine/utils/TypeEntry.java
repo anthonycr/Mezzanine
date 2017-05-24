@@ -7,11 +7,14 @@ import java.util.Map;
 import javax.lang.model.element.TypeElement;
 
 /**
+ * A simple implementation of {@link Map.Entry}
+ * that uses {@link TypeElement} for its keys.
+ * <p>
  * Created by anthonycr on 5/23/17.
  */
 public final class TypeEntry<T> implements Map.Entry<TypeElement, T> {
 
-    @NotNull private TypeElement key;
+    @NotNull private final TypeElement key;
     @NotNull private T value;
 
     public TypeEntry(@NotNull TypeElement key, @NotNull T value) {

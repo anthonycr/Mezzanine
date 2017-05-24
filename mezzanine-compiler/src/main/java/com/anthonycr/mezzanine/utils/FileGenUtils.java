@@ -13,9 +13,11 @@ import javax.lang.model.element.Element;
 import javax.tools.JavaFileObject;
 
 /**
+ * Utils used to write a {@link JavaFile}
+ * to a file.
+ * <p>
  * Created by anthonycr on 5/22/17.
  */
-
 public class FileGenUtils {
     private FileGenUtils() {
         throw new UnsupportedOperationException("This class is not instantiable");
@@ -44,15 +46,13 @@ public class FileGenUtils {
         } catch (Exception e) {
             try {
                 filerSourceFile.delete();
-            } catch (Exception ignored) {
-            }
+            } catch (Exception ignored) {}
             throw e;
         } finally {
             if (writer != null) {
                 try {
                     writer.close();
-                } catch (IOException ignored) {
-                }
+                } catch (IOException ignored) {}
             }
         }
     }

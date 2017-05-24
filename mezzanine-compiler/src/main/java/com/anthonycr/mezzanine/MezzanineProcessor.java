@@ -3,6 +3,7 @@ package com.anthonycr.mezzanine;
 import com.anthonycr.mezzanine.filter.SupportedElementFilter;
 import com.anthonycr.mezzanine.generator.MezzanineGenerator;
 import com.anthonycr.mezzanine.map.MezzanineMapper;
+import com.anthonycr.mezzanine.source.ElementSource;
 import com.anthonycr.mezzanine.source.MezzanineElementSource;
 import com.anthonycr.mezzanine.utils.FileGenUtils;
 import com.anthonycr.mezzanine.utils.MessagerUtils;
@@ -42,9 +43,9 @@ public class MezzanineProcessor extends AbstractProcessor {
 
         isProcessed = true;
 
-        MessagerUtils.intitialize(processingEnv.getMessager());
+        MessagerUtils.initialize(processingEnv.getMessager());
 
-        MezzanineElementSource mezzanineElementSource = new MezzanineElementSource(roundEnvironment);
+        ElementSource mezzanineElementSource = new MezzanineElementSource(roundEnvironment);
 
         MessagerUtils.reportInfo("Starting Mezzanine processing");
 

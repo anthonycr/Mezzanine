@@ -16,14 +16,23 @@ import javax.lang.model.element.TypeElement;
 import io.reactivex.functions.Function;
 
 /**
+ * The Java generator.
+ * <p>
  * Created by anthonycr on 5/22/17.
  */
 public class MezzanineGenerator {
 
-    private static String PREFIX = "Generator_";
+    private static final String PREFIX = "Generator_";
 
     private MezzanineGenerator() {}
 
+    /**
+     * A mapping function that generates the {@link TypeSpec}
+     * for the interface represented by the {@link TypeElement}
+     * which returns the {@link String}.
+     *
+     * @return a valid mapping function.
+     */
     @NotNull
     public static Function<Map.Entry<TypeElement, String>, TypeSpec> generateMezzanineTypeSpec() {
         return typeElementStringEntry -> {

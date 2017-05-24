@@ -11,12 +11,24 @@ import javax.lang.model.element.ExecutableElement;
 import io.reactivex.functions.Predicate;
 
 /**
+ * Filters used by the Mezzanine processor.
+ * <p>
  * Created by anthonycr on 5/22/17.
  */
 public final class SupportedElementFilter {
 
     private SupportedElementFilter() {}
 
+    /**
+     * Filters a list of elements for only
+     * the elements supported by Mezzanine.
+     * If unsupported elements are in the stream,
+     * it will report a message to the
+     * {@link MessagerUtils} so that the consumer
+     * knows what they have done wrong.
+     *
+     * @return a valid filter.
+     */
     @NotNull
     public static Predicate<Element> filterForSupportedElements() {
         return methodElement -> {
