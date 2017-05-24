@@ -27,6 +27,7 @@ import javax.lang.model.element.TypeElement;
 public class MezzanineProcessor extends AbstractProcessor {
 
     private static final String PACKAGE_NAME = "com.anthonycr.mezzanine";
+    private static final String CLASS_NAME = "Mezzanine";
 
     private boolean isProcessed;
 
@@ -57,7 +58,7 @@ public class MezzanineProcessor extends AbstractProcessor {
             .map(MezzanineGenerator.generateMezzanineTypeSpec())
             .toList()
             .subscribe(typeSpecs -> {
-                TypeSpec.Builder mezzanineTypeSpecBuilder = TypeSpec.classBuilder("Mezzanine")
+                TypeSpec.Builder mezzanineTypeSpecBuilder = TypeSpec.classBuilder(CLASS_NAME)
                     .addModifiers(Modifier.PUBLIC);
 
                 typeSpecs.forEach(mezzanineTypeSpecBuilder::addType);
