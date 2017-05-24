@@ -22,3 +22,9 @@ allprojects {
 task clean(type: Delete) {
     delete rootProject.buildDir
 }
+
+subprojects {
+    group = 'com.anthonycr.mezzanine'
+    version = '1.0.0'
+}
+
