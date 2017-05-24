@@ -1,6 +1,8 @@
-package com.anthonycr.mezzanine;
+package com.anthonycr.mezzanine.map;
 
+import com.anthonycr.mezzanine.FileStream;
 import com.anthonycr.mezzanine.utils.MessagerUtils;
+import com.anthonycr.mezzanine.utils.TypeEntry;
 import com.anthonycr.mezzanine.utils.Preconditions;
 import com.google.common.base.Charsets;
 
@@ -20,41 +22,17 @@ import io.reactivex.functions.Function;
 /**
  * Created by anthonycr on 5/22/17.
  */
+public final class MezzanineMapper {
 
-public class MezzanineMapper {
+    private MezzanineMapper() {}
 
-    private static final class MezzanineEntry<T> implements Map.Entry<TypeElement, T> {
-
-        private TypeElement key;
-        private T value;
-
-        public MezzanineEntry(TypeElement key, T value) {
-            this.key = key;
-            this.value = value;
-        }
-
-        @Override
-        public TypeElement getKey() {
-            return key;
-        }
-
-        @Override
-        public T getValue() {
-            return value;
-        }
-
-        @Override
-        public T setValue(T value) {
-            return this.value = value;
-        }
-    }
-
+    @NotNull
     private static String prependSlashIfNecessary(@NotNull String path) {
         return (path.startsWith("/") ? "" : "/") + path;
     }
 
     @NotNull
-    public static Function<Element, Map.Entry<TypeElement, File>> mapElementToFile() {
+    public static Function<Element, Map.Entry<TypeElement, File>> elementToTypeAndFilePair() {
         return element -> {
 
             Element enclosingElement = element.getEnclosingElement();
@@ -74,17 +52,17 @@ public class MezzanineMapper {
                 MessagerUtils.reportError(element, "File does not exist");
             }
 
-            return new MezzanineEntry<>((TypeElement) enclosingElement, file);
+            return new TypeEntry<>((TypeElement) enclosingElement, file);
         };
     }
 
     @NotNull
-    public static Function<Map.Entry<TypeElement, File>, Map.Entry<TypeElement, String>> mapFileToString() {
+    public static Function<Map.Entry<TypeElement, File>, Map.Entry<TypeElement, String>> fileToStringContents() {
         return typeElementFileEntry -> {
 
             String fileAsString = new String(Files.readAllBytes(typeElementFileEntry.getValue().toPath()), Charsets.UTF_8);
 
-            return new MezzanineEntry<>(typeElementFileEntry.getKey(), fileAsString);
+            return new TypeEntry<>(typeElementFileEntry.getKey(), fileAsString);
         };
     }
 }

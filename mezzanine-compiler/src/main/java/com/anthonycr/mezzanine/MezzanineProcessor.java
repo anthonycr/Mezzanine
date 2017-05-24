@@ -1,7 +1,9 @@
 package com.anthonycr.mezzanine;
 
+import com.anthonycr.mezzanine.filter.SupportedElementFilter;
+import com.anthonycr.mezzanine.generator.MezzanineGenerator;
+import com.anthonycr.mezzanine.map.MezzanineMapper;
 import com.anthonycr.mezzanine.source.MezzanineElementSource;
-import com.anthonycr.mezzanine.source.SupportedElementSource;
 import com.anthonycr.mezzanine.utils.FileGenUtils;
 import com.anthonycr.mezzanine.utils.MessagerUtils;
 import com.google.auto.service.AutoService;
@@ -43,13 +45,14 @@ public class MezzanineProcessor extends AbstractProcessor {
         MessagerUtils.intitialize(processingEnv.getMessager());
 
         MezzanineElementSource mezzanineElementSource = new MezzanineElementSource(roundEnvironment);
-        SupportedElementSource supportedElements = new SupportedElementSource(mezzanineElementSource);
 
-        MessagerUtils.reportInfo("Starting Mezzanine");
-        supportedElements.createElementStream()
-            .map(MezzanineMapper.mapElementToFile())
-            .doOnNext(typeElementFileEntry -> MessagerUtils.reportInfo("Processing for file: " + typeElementFileEntry.getValue()))
-            .map(MezzanineMapper.mapFileToString())
+        MessagerUtils.reportInfo("Starting Mezzanine processing");
+
+        mezzanineElementSource.createElementStream()
+            .filter(SupportedElementFilter.filterForSupportedElements())
+            .map(MezzanineMapper.elementToTypeAndFilePair())
+            .doOnNext(typeElementFileEntry -> MessagerUtils.reportInfo("Processing file: " + typeElementFileEntry.getValue()))
+            .map(MezzanineMapper.fileToStringContents())
             .map(MezzanineGenerator.generateMezzanineTypeSpec())
             .toList()
             .subscribe(typeSpecs -> {

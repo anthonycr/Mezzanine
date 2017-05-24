@@ -1,4 +1,4 @@
-package com.anthonycr.mezzanine.source;
+package com.anthonycr.mezzanine.filter;
 
 import com.anthonycr.mezzanine.utils.MessagerUtils;
 
@@ -8,34 +8,17 @@ import javax.lang.model.element.Element;
 import javax.lang.model.element.ElementKind;
 import javax.lang.model.element.ExecutableElement;
 
-import io.reactivex.Flowable;
 import io.reactivex.functions.Predicate;
 
 /**
  * Created by anthonycr on 5/22/17.
  */
-public class SupportedElementSource implements ElementSource {
+public final class SupportedElementFilter {
 
-    @NotNull private final ElementSource elementSource;
-
-    public SupportedElementSource(@NotNull ElementSource elementSource) {
-        this.elementSource = elementSource;
-    }
+    private SupportedElementFilter() {}
 
     @NotNull
-    @Override
-    public Flowable<Element> createElementStream() {
-        return elementSource.createElementStream()
-            .filter(filterForSupportedElements());
-    }
-
-    @NotNull
-    private static String className(@NotNull Class clazz) {
-        return clazz.getName().replace('$', '.');
-    }
-
-    @NotNull
-    private static Predicate<Element> filterForSupportedElements() {
+    public static Predicate<Element> filterForSupportedElements() {
         return methodElement -> {
 
             Element classElement = methodElement.getEnclosingElement();
@@ -57,7 +40,7 @@ public class SupportedElementSource implements ElementSource {
 
             ExecutableElement creatorMethodElement = (ExecutableElement) methodElement;
 
-            if (!creatorMethodElement.getReturnType().toString().equals(className(String.class))) {
+            if (!creatorMethodElement.getReturnType().toString().equals(String.class.getName().replace('$', '.'))) {
                 MessagerUtils.reportError(creatorMethodElement, "Interface must have a String return type");
                 return false;
             }
