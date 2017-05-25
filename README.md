@@ -16,6 +16,18 @@ compile project(':mezzanine')
 annotationProcessor project(':mezzanine-compiler')
 ```
 
+##### Java
+```groovy
+plugins {
+    id 'net.ltgt.apt' version '0.10'
+}
+
+dependencies {
+    compile project(':mezzanine')
+    apt project(':mezzanine-compiler')
+}
+```
+
 ### API
 - `@FileStream(String path)`: the path to the file relative to the project root
 - Create an `interface` with one method with no parameters and a return type of `String`
