@@ -27,7 +27,7 @@ annotationProcessor project(':mezzanine-compiler')
 ##### Java
 ```groovy
 plugins {
-  id "net.ltgt.apt" version "0.10"
+    id 'net.ltgt.apt' version '0.10'
 }
 
 dependencies {
