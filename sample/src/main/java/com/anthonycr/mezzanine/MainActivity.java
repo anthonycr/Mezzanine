@@ -11,7 +11,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        FileReader fileReader = new Mezzanine.Generator_FileReader();
+        FileReader fileReader = new MezzanineGenerator.FileReader();
 
         String file = fileReader.readInTestJsonFile();
 

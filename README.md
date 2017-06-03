@@ -1,12 +1,20 @@
 # Mezzanine
-A Java annotation processor that reads UTF-8 files at compile time.
+A Java annotation processor that allows you to read static UTF-8 files synchronously.
 
 ### What does this do?
-A frequent scenario for Android apps is to need to read in a default configuration file on startup and change functionality based on the contents of the configuration file. A convenient, frequently used way to store this configuration file is in assets, and then to read out of this file on startup. This can mean doing expensive disk I/O on the main thread... which can cause increased startup time and dropped frames.
+A frequent scenario for Android apps is to need to read in a default configuration file on startup and
+change functionality based on the contents of the configuration file. A convenient, frequently used way
+to store this configuration file is in assets, and then to read out of this file on startup. This can
+mean doing expensive disk I/O on the main thread - which can cause increased startup time and dropped frames.
 
-Mezzanine solves this problem by storing file contents in a `String` constant, which is loaded when the application is started, rather than requiring additional disk I/O after startup. It acts as an intermediary between files and your running Java code. This library is ideal for small files. There is also a hard limit in the javac compiler where `String` constants cannot exceed 65535 bytes in size.
+Mezzanine solves this problem by storing file contents in a `String` constant, which is loaded when the
+application is started, rather than requiring additional disk I/O after startup. It acts as an intermediary
+between files and your running Java code. This library is ideal for small files. There is also a hard limit
+in the javac compiler where `String` constants cannot exceed 65535 bytes in size.
 
-Of course, you may already be copying the contents of a file into a `String` and then reading it at runtime for the performance gain, but this can be a nuisance to maintain. Using Mezzanine, you don't have to worry about escaping the `String` contents or losing formatting. You can edit in the file, and then read from the method at runtime.
+Of course, you may already be copying the contents of a file into a `String` and then reading it at runtime
+for the performance gain, but this can be a nuisance to maintain. Using Mezzanine, you don't have to worry
+about escaping the `String` contents or losing formatting. You can edit within the file, and then read from the method at runtime.
 
 ### Usage
 
@@ -16,9 +24,21 @@ compile project(':mezzanine')
 annotationProcessor project(':mezzanine-compiler')
 ```
 
+##### Java
+```groovy
+plugins {
+  id "net.ltgt.apt" version "0.10"
+}
+
+dependencies {
+    compile project(':mezzanine')
+    apt project(':mezzanine-compiler')
+}
+```
+
 ### API
-- `@FileStream(String path)`: the path to the file relative to the project root
-- Create an `interface` with one method with no parameters and a return type of `String`
+- `@FileStream(String path)`: the path to the file relative to the project root.
+- Create an `interface` with one method with no parameters and a return type of `String`.
 - Annotate that single method with `@FileStream` and pass the path to the file as the value in the annotation.
 - Consume the generated implementation of the interface to get the file as a string.
 - Files are assumed to be encoded as `UTF-8`.
@@ -33,7 +53,7 @@ public interface MyFileReader {
 }
 ...
 
-MyFileReader fileReader = new Mezzanine.Generator_MyFileReader();
+MyFileReader fileReader = new MezzanineGenerator.MyFileReader();
 
 String fileContents = fileReader.readMyFile();
 ```

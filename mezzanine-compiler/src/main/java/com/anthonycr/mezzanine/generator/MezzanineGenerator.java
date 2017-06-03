@@ -27,10 +27,8 @@ import io.reactivex.functions.Function;
  */
 public class MezzanineGenerator {
 
-    private static final String PREFIX = "Generator_";
-
     private static final String PACKAGE_NAME = "com.anthonycr.mezzanine";
-    private static final String CLASS_NAME = "Mezzanine";
+    private static final String CLASS_NAME = "MezzanineGenerator";
 
     private MezzanineGenerator() {}
 
@@ -57,7 +55,7 @@ public class MezzanineGenerator {
                 .addCode("return \"" + fileContents + "\";\n")
                 .build();
 
-            return TypeSpec.classBuilder(PREFIX + typeElement.getSimpleName())
+            return TypeSpec.classBuilder(typeElement.getSimpleName().toString())
                 .addModifiers(Modifier.PUBLIC)
                 .addModifiers(Modifier.STATIC)
                 .addSuperinterface(ClassName.get(typeElement))
