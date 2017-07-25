@@ -1,5 +1,5 @@
 # Mezzanine
-A Java annotation processor that allows you to read static UTF-8 files synchronously.
+An annotation processor that allows you to read static UTF-8 files synchronously.
 
 ### What does this do?
 A frequent scenario for Android apps is to need to read in a default configuration file on startup and
