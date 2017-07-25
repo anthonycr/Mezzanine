@@ -42,7 +42,7 @@ object MezzanineGenerator {
                     .addAnnotation(Override::class.java)
                     .addModifiers(Modifier.PUBLIC)
                     .returns(String::class.java)
-                    .addCode("return \"$fileContents\";\n")
+                    .addCode("return \"$1L\";\n", fileContents)
                     .build()
 
             return@Function TypeSpec.classBuilder(typeElement.simpleName.toString())

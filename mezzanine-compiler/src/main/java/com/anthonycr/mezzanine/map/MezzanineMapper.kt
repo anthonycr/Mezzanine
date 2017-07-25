@@ -24,7 +24,7 @@ import io.reactivex.functions.Function
 object MezzanineMapper {
 
     private fun prependSlashIfNecessary(path: String): String {
-        return (if (path.startsWith("/")) "" else "/") + path
+        return "${(if (path.startsWith("/")) "" else "/")}$path"
     }
 
     /**
