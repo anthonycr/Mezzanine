@@ -4,6 +4,7 @@ import com.anthonycr.mezzanine.filter.SupportedElementFilter
 import com.anthonycr.mezzanine.generator.MezzanineGenerator
 import com.anthonycr.mezzanine.map.MezzanineMapper
 import com.anthonycr.mezzanine.source.MezzanineElementSource
+import com.anthonycr.mezzanine.utils.FileGenUtils
 import com.anthonycr.mezzanine.utils.MessagerUtils
 import com.google.auto.service.AutoService
 import javax.annotation.processing.AbstractProcessor
@@ -29,6 +30,7 @@ class MezzanineProcessor : AbstractProcessor() {
         isProcessed = true
 
         MessagerUtils.messager = processingEnv.messager
+        FileGenUtils.filer = processingEnv.filer
 
         val mezzanineElementSource = MezzanineElementSource(roundEnvironment)
 
@@ -43,7 +45,7 @@ class MezzanineProcessor : AbstractProcessor() {
                 .toList()
                 .map(MezzanineGenerator.generateMezzanineTypeSpec())
                 .map(MezzanineGenerator.generateJavaFile())
-                .flatMapCompletable(MezzanineGenerator.writeFileToDisk(processingEnv.filer))
+                .flatMapCompletable(MezzanineGenerator.writeFileToDisk())
                 .subscribe { MessagerUtils.reportInfo("File successfully processed") }
 
         return true

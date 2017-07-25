@@ -8,7 +8,6 @@ import com.squareup.javapoet.TypeSpec
 import io.reactivex.Completable
 import io.reactivex.functions.Function
 import org.apache.commons.lang3.StringEscapeUtils
-import javax.annotation.processing.Filer
 import javax.lang.model.element.ExecutableElement
 import javax.lang.model.element.Modifier
 import javax.lang.model.element.TypeElement
@@ -92,9 +91,9 @@ object MezzanineGenerator {
      * *
      * @return a valid mapping function.
      */
-    fun writeFileToDisk(filer: Filer): Function<JavaFile, Completable> {
+    fun writeFileToDisk(): Function<JavaFile, Completable> {
         return Function { javaFile ->
-            FileGenUtils.writeToFile(javaFile, filer)
+            FileGenUtils.writeToFile(javaFile)
             return@Function Completable.complete()
         }
     }
