@@ -7,49 +7,41 @@ import javax.lang.model.element.ElementKind
 import javax.lang.model.element.ExecutableElement
 
 /**
- * Filters used by the Mezzanine processor.
- *
+ * Filters a list of elements for only
+ * the elements supported by Mezzanine.
+ * If unsupported elements are in the stream,
+ * it will report a message to the
+ * [MessagerUtils] so that the consumer
+ * knows what they have done wrong.
  *
  * Created by anthonycr on 5/22/17.
  */
-object SupportedElementFilter {
+object SupportedElementFilter : Predicate<Element> {
 
-    /**
-     * Filters a list of elements for only
-     * the elements supported by Mezzanine.
-     * If unsupported elements are in the stream,
-     * it will report a message to the
-     * [MessagerUtils] so that the consumer
-     * knows what they have done wrong.
+    override fun test(methodElement: Element): Boolean {
+        val classElement = methodElement.enclosingElement
 
-     * @return a valid filter.
-     */
-    fun filterForSupportedElements(): Predicate<Element> {
-        return Predicate { methodElement ->
-
-            val classElement = methodElement.enclosingElement
-
-            if (classElement.kind != ElementKind.INTERFACE) {
-                MessagerUtils.reportError(classElement, "Only interfaces are supported")
-                return@Predicate false
-            }
-
-            if (classElement.enclosedElements.size != 1) {
-                MessagerUtils.reportError(classElement, "Only interfaces with 1 method are supported")
-                return@Predicate false
-            }
-
-            if (methodElement !is ExecutableElement) {
-                MessagerUtils.reportError(methodElement, "Only method annotations are supported")
-                return@Predicate false
-            }
-
-            if (methodElement.returnType.toString() != String::class.java.name.replace('$', '.')) {
-                MessagerUtils.reportError(methodElement, "Interface must have a String return type")
-                return@Predicate false
-            }
-
-            return@Predicate true
+        if (classElement.kind != ElementKind.INTERFACE) {
+            MessagerUtils.reportError(classElement, "Only interfaces are supported")
+            return false
         }
+
+        if (classElement.enclosedElements.size != 1) {
+            MessagerUtils.reportError(classElement, "Only interfaces with 1 method are supported")
+            return false
+        }
+
+        if (methodElement !is ExecutableElement) {
+            MessagerUtils.reportError(methodElement, "Only method annotations are supported")
+            return false
+        }
+
+        if (methodElement.returnType.toString() != String::class.java.name.replace('$', '.')) {
+            MessagerUtils.reportError(methodElement, "Interface must have a String return type")
+            return false
+        }
+
+        return true
     }
+
 }

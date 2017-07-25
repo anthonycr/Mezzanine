@@ -6,9 +6,6 @@ import com.anthonycr.mezzanine.map.MezzanineMapper
 import com.anthonycr.mezzanine.source.MezzanineElementSource
 import com.anthonycr.mezzanine.utils.MessagerUtils
 import com.google.auto.service.AutoService
-import com.squareup.javapoet.JavaFile
-import com.squareup.javapoet.TypeSpec
-import java.io.File
 import javax.annotation.processing.AbstractProcessor
 import javax.annotation.processing.Processor
 import javax.annotation.processing.RoundEnvironment
@@ -38,14 +35,14 @@ class MezzanineProcessor : AbstractProcessor() {
         MessagerUtils.reportInfo("Starting Mezzanine processing")
 
         mezzanineElementSource.createElementStream()
-                .filter(SupportedElementFilter.filterForSupportedElements())
-                .map<Pair<TypeElement, File>>(MezzanineMapper.elementToTypeAndFilePair())
+                .filter(SupportedElementFilter)
+                .map(MezzanineMapper.elementToTypeAndFilePair())
                 .doOnNext { typeElementFileEntry -> MessagerUtils.reportInfo("Processing file: " + typeElementFileEntry.second) }
-                .map<Pair<TypeElement, String>>(MezzanineMapper.fileToStringContents())
-                .map<TypeSpec>(MezzanineGenerator.generateGeneratorTypeSpecs())
+                .map(MezzanineMapper.fileToStringContents())
+                .map(MezzanineGenerator.generateGeneratorTypeSpecs())
                 .toList()
-                .map<TypeSpec>(MezzanineGenerator.generateMezzanineTypeSpec())
-                .map<JavaFile>(MezzanineGenerator.generateJavaFile())
+                .map(MezzanineGenerator.generateMezzanineTypeSpec())
+                .map(MezzanineGenerator.generateJavaFile())
                 .flatMapCompletable(MezzanineGenerator.writeFileToDisk(processingEnv.filer))
                 .subscribe { MessagerUtils.reportInfo("File successfully processed") }
 
