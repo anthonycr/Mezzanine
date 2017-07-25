@@ -18,10 +18,18 @@ about escaping the `String` contents or losing formatting. You can edit within t
 
 ### Usage
 
-##### Android
+##### Android/Java
 ```groovy
 compile project(':mezzanine')
 annotationProcessor project(':mezzanine-compiler')
+```
+
+##### Android/Kotlin
+```groovy
+apply plugin: 'kotlin-kapt'
+
+compile project(':mezzanine')
+kapt project(':mezzanine-compiler')
 ```
 
 ##### Java
@@ -44,7 +52,26 @@ dependencies {
 - Files are assumed to be encoded as `UTF-8`.
 
 ### Sample
-```Java
+
+#### Kotlin
+```kotlin
+interface MyFileReader {
+
+    @FileStream("path/from/root/to/file.json")
+    fun readMyFile(): String
+
+}
+...
+
+val fileReader = MezzanineGenerator.MyFileReader()
+
+val fileContents = fileReader.readMyFile()
+
+println("File contents: $fileContents")
+```
+
+#### Java
+```java
 public interface MyFileReader {
 
     @FileStream("path/from/root/to/file.json")
@@ -56,6 +83,8 @@ public interface MyFileReader {
 MyFileReader fileReader = new MezzanineGenerator.MyFileReader();
 
 String fileContents = fileReader.readMyFile();
+
+System.out.println("File contents: " + fileContents);
 ```
 
 ### License
