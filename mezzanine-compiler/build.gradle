@@ -18,7 +18,7 @@ dependencies {
     compile 'org.apache.commons:commons-lang3:3.0'
 
     // kotlin
-    compile "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
+    compile "org.jetbrains.kotlin:kotlin-stdlib-jre8:$kotlin_version"
 
     compile project(':mezzanine')
 }
