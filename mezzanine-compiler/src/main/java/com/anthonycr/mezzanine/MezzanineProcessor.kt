@@ -1,10 +1,7 @@
 package com.anthonycr.mezzanine
 
 import com.anthonycr.mezzanine.filter.SupportedElementFilter
-import com.anthonycr.mezzanine.function.ElementToTypeAndFilePairFunction
-import com.anthonycr.mezzanine.function.FileToStringContentsFunction
-import com.anthonycr.mezzanine.function.GenerateFileStreamTypeSpecFunction
-import com.anthonycr.mezzanine.generator.MezzanineGenerator
+import com.anthonycr.mezzanine.function.*
 import com.anthonycr.mezzanine.source.MezzanineElementSource
 import com.anthonycr.mezzanine.utils.FileGenUtils
 import com.anthonycr.mezzanine.utils.MessagerUtils
@@ -24,15 +21,18 @@ class MezzanineProcessor : AbstractProcessor() {
 
     override fun getSupportedSourceVersion(): SourceVersion = SourceVersion.latestSupported()
 
+    override fun init(processingEnvironment: javax.annotation.processing.ProcessingEnvironment) {
+        super.init(processingEnvironment)
+        MessagerUtils.messager = processingEnvironment.messager
+        FileGenUtils.filer = processingEnvironment.filer
+    }
+
     override fun process(set: Set<TypeElement>, roundEnvironment: RoundEnvironment): Boolean {
         if (isProcessed) {
             return true
         }
 
         isProcessed = true
-
-        MessagerUtils.messager = processingEnv.messager
-        FileGenUtils.filer = processingEnv.filer
 
         val mezzanineElementSource = MezzanineElementSource(roundEnvironment)
 
@@ -45,9 +45,9 @@ class MezzanineProcessor : AbstractProcessor() {
                 .map(FileToStringContentsFunction)
                 .map(GenerateFileStreamTypeSpecFunction)
                 .toList()
-                .map(MezzanineGenerator.generateMezzanineTypeSpec())
-                .map(MezzanineGenerator.generateJavaFile())
-                .flatMapCompletable(MezzanineGenerator.writeFileToDisk())
+                .map(GenerateMezzanineTypeSpecFunction)
+                .map(TypeSpecToJavaFileFunction)
+                .flatMapCompletable(WriteFileToDiskFunction)
                 .subscribe { MessagerUtils.reportInfo("File successfully processed") }
 
         return true
