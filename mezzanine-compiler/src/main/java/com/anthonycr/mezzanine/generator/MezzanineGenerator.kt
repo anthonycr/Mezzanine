@@ -1,16 +1,11 @@
 package com.anthonycr.mezzanine.generator
 
 import com.anthonycr.mezzanine.utils.FileGenUtils
-import com.squareup.javapoet.ClassName
 import com.squareup.javapoet.JavaFile
-import com.squareup.javapoet.MethodSpec
 import com.squareup.javapoet.TypeSpec
 import io.reactivex.Completable
 import io.reactivex.functions.Function
-import org.apache.commons.lang3.StringEscapeUtils
-import javax.lang.model.element.ExecutableElement
 import javax.lang.model.element.Modifier
-import javax.lang.model.element.TypeElement
 
 /**
  * The Java generator.
@@ -22,36 +17,6 @@ object MezzanineGenerator {
 
     private val PACKAGE_NAME = "com.anthonycr.mezzanine"
     private val CLASS_NAME = "MezzanineGenerator"
-
-    /**
-     * A mapping function that generates the [TypeSpec]
-     * for the interface represented by the [TypeElement]
-     * which returns the [String].
-
-     * @return a valid mapping function.
-     */
-    fun generateGeneratorTypeSpecs(): Function<Pair<TypeElement, String>, TypeSpec> {
-        return Function { (typeElement, stringContent) ->
-
-            val fileContents = StringEscapeUtils.escapeJava(stringContent)
-
-            val singleMethod = typeElement.enclosedElements[0] as ExecutableElement
-
-            val methodSpec = MethodSpec.methodBuilder(singleMethod.simpleName.toString())
-                    .addAnnotation(Override::class.java)
-                    .addModifiers(Modifier.PUBLIC)
-                    .returns(String::class.java)
-                    .addCode("return \"$1L\";\n", fileContents)
-                    .build()
-
-            return@Function TypeSpec.classBuilder(typeElement.simpleName.toString())
-                    .addModifiers(Modifier.PUBLIC)
-                    .addModifiers(Modifier.STATIC)
-                    .addSuperinterface(ClassName.get(typeElement))
-                    .addMethod(methodSpec)
-                    .build()
-        }
-    }
 
     /**
      * Generates the Mezzanine [TypeSpec]

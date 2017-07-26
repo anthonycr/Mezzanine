@@ -1,8 +1,10 @@
 package com.anthonycr.mezzanine
 
 import com.anthonycr.mezzanine.filter.SupportedElementFilter
+import com.anthonycr.mezzanine.function.ElementToTypeAndFilePairFunction
+import com.anthonycr.mezzanine.function.FileToStringContentsFunction
+import com.anthonycr.mezzanine.function.GenerateFileStreamTypeSpecFunction
 import com.anthonycr.mezzanine.generator.MezzanineGenerator
-import com.anthonycr.mezzanine.map.MezzanineMapper
 import com.anthonycr.mezzanine.source.MezzanineElementSource
 import com.anthonycr.mezzanine.utils.FileGenUtils
 import com.anthonycr.mezzanine.utils.MessagerUtils
@@ -38,10 +40,10 @@ class MezzanineProcessor : AbstractProcessor() {
 
         mezzanineElementSource.createElementStream()
                 .filter(SupportedElementFilter)
-                .map(MezzanineMapper.elementToTypeAndFilePair())
+                .map(ElementToTypeAndFilePairFunction)
                 .doOnNext { typeElementFileEntry -> MessagerUtils.reportInfo("Processing file: " + typeElementFileEntry.second) }
-                .map(MezzanineMapper.fileToStringContents())
-                .map(MezzanineGenerator.generateGeneratorTypeSpecs())
+                .map(FileToStringContentsFunction)
+                .map(GenerateFileStreamTypeSpecFunction)
                 .toList()
                 .map(MezzanineGenerator.generateMezzanineTypeSpec())
                 .map(MezzanineGenerator.generateJavaFile())
