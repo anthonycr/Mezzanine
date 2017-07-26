@@ -13,8 +13,6 @@ import javax.lang.model.element.TypeElement
  * supported elements (methods) and maps them
  * to their enclosing interfaces and the files
  * represented by the method annotations.
- *
- * @return a valid mapping function.
  */
 object ElementToTypeAndFilePairFunction : Function<Element, Pair<TypeElement, File>> {
 

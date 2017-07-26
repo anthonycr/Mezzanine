@@ -11,8 +11,6 @@ import javax.lang.model.element.TypeElement
  * interfaces and files and reads in the file,
  * emitting an stream of interfaces and file
  * contents (as strings).
- *
- * @return a valid mapping function.
  */
 object FileToStringContentsFunction : Function<Pair<TypeElement, File>, Pair<TypeElement, String>> {
 

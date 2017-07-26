@@ -13,8 +13,6 @@ import javax.lang.model.element.TypeElement
  * A mapping function that generates the [TypeSpec]
  * for the interface represented by the [TypeElement]
  * which returns the [String].
- *
- * @return a valid mapping function.
  */
 object GenerateFileStreamTypeSpecFunction : Function<Pair<TypeElement, String>, TypeSpec> {
 
