@@ -19,6 +19,6 @@ before_install:
 install:
   - ./gradlew
 script:
-  - ./gradlew :mezzanine:assembleDebug --stacktrace
-  - ./gradlew :mezzanine-compiler:assembleDebug --stacktrace
+  - ./gradlew :mezzanine:assemble --stacktrace
+  - ./gradlew :mezzanine-compiler:assemble --stacktrace
   - ./gradlew :sample:assembleDebug --stacktrace

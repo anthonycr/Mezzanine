@@ -1,6 +1,8 @@
 # Mezzanine
 An annotation processor that allows you to read static UTF-8 files synchronously.
 
+[![Build Status](https://travis-ci.org/anthonycr/Mezzanine.svg?branch=master)](https://travis-ci.org/anthonycr/Mezzanine)
+
 ### What does this do?
 A frequent scenario for Android apps is to need to read in a default configuration file on startup and
 change functionality based on the contents of the configuration file. A convenient, frequently used way
