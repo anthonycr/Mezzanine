@@ -2,6 +2,10 @@ apply plugin: 'java'
 apply plugin: 'kotlin'
 apply plugin: 'kotlin-kapt'
 
+project.ext {
+    publishArtifactId = "${project.baseArtifactId}-compiler"
+}
+
 dependencies {
     // rx
     compile 'io.reactivex.rxjava2:rxjava:2.1.0'
@@ -21,7 +25,13 @@ dependencies {
     compile "org.jetbrains.kotlin:kotlin-stdlib-jre8:$kotlin_version"
 
     compile project(':mezzanine')
+
+    testCompile 'junit:junit:4.12'
+    testCompile 'org.assertj:assertj-core:3.8.0'
+    testCompile 'org.mockito:mockito-android:2.8.47'
 }
 
 sourceCompatibility = "1.8"
 targetCompatibility = "1.8"
+
+apply from: '../library-release.gradle'

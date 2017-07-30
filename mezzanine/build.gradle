@@ -1,5 +1,11 @@
 apply plugin: 'java'
 apply plugin: 'kotlin'
 
+project.ext {
+    publishArtifactId = project.baseArtifactId
+}
+
 sourceCompatibility = "1.7"
 targetCompatibility = "1.7"
+
+apply from: '../library-release.gradle'

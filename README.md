@@ -20,18 +20,26 @@ about escaping the `String` contents or losing formatting. You can edit within t
 
 ### Usage
 
+```groovy
+allprojects {
+    repositories {
+        maven { url "https://dl.bintray.com/anthonycr/android/" }
+    }
+}
+```
+
 ##### Android/Java
 ```groovy
-compile project(':mezzanine')
-annotationProcessor project(':mezzanine-compiler')
+compile 'com.anthonycr.mezzanine:mezzanine:1.0.0'
+annotationProcessor 'com.anthonycr.mezzanine:mezzanine-compiler:1.0.0'
 ```
 
 ##### Android/Kotlin
 ```groovy
 apply plugin: 'kotlin-kapt'
 
-compile project(':mezzanine')
-kapt project(':mezzanine-compiler')
+compile 'com.anthonycr.mezzanine:mezzanine:1.0.0'
+kapt 'com.anthonycr.mezzanine:mezzanine-compiler:1.0.0'
 ```
 
 ##### Java
@@ -41,25 +49,26 @@ plugins {
 }
 
 dependencies {
-    compile project(':mezzanine')
-    apt project(':mezzanine-compiler')
+    compile 'com.anthonycr.mezzanine:mezzanine:1.0.0'
+    apt 'com.anthonycr.mezzanine:mezzanine-compiler:1.0.0'
 }
 ```
 
 ### API
 - `@FileStream(String path)`: the path to the file relative to the project root.
 - Create an `interface` with one method with no parameters and a return type of `String`.
-- Annotate that single method with `@FileStream` and pass the path to the file as the value in the annotation.
+- Annotate the interface with `@FileStream` and pass the path to the file as the value in the annotation.
 - Consume the generated implementation of the interface to get the file as a string.
 - Files are assumed to be encoded as `UTF-8`.
+- Files must be less than 65kB, otherwise javac will complain.
 
 ### Sample
 
 #### Kotlin
 ```kotlin
+@FileStream("path/from/root/to/file.json")
 interface MyFileReader {
 
-    @FileStream("path/from/root/to/file.json")
     fun readMyFile(): String
 
 }
@@ -74,9 +83,9 @@ println("File contents: $fileContents")
 
 #### Java
 ```java
+@FileStream("path/from/root/to/file.json")
 public interface MyFileReader {
 
-    @FileStream("path/from/root/to/file.json")
     String readMyFile();
 
 }
