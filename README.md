@@ -57,17 +57,18 @@ dependencies {
 ### API
 - `@FileStream(String path)`: the path to the file relative to the project root.
 - Create an `interface` with one method with no parameters and a return type of `String`.
-- Annotate that single method with `@FileStream` and pass the path to the file as the value in the annotation.
+- Annotate the interface with `@FileStream` and pass the path to the file as the value in the annotation.
 - Consume the generated implementation of the interface to get the file as a string.
 - Files are assumed to be encoded as `UTF-8`.
+- Files must be less than 65kB, otherwise javac will complain.
 
 ### Sample
 
 #### Kotlin
 ```kotlin
+@FileStream("path/from/root/to/file.json")
 interface MyFileReader {
 
-    @FileStream("path/from/root/to/file.json")
     fun readMyFile(): String
 
 }
@@ -82,9 +83,9 @@ println("File contents: $fileContents")
 
 #### Java
 ```java
+@FileStream("path/from/root/to/file.json")
 public interface MyFileReader {
 
-    @FileStream("path/from/root/to/file.json")
     String readMyFile();
 
 }
