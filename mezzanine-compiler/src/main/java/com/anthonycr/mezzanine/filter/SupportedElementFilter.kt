@@ -18,8 +18,7 @@ import javax.lang.model.element.ExecutableElement
  */
 object SupportedElementFilter : Predicate<Element> {
 
-    override fun test(methodElement: Element): Boolean {
-        val classElement = methodElement.enclosingElement
+    override fun test(classElement: Element): Boolean {
 
         if (classElement.kind != ElementKind.INTERFACE) {
             MessagerUtils.reportError(classElement, "Only interfaces are supported")
@@ -31,13 +30,15 @@ object SupportedElementFilter : Predicate<Element> {
             return false
         }
 
+        val methodElement = classElement.enclosedElements[0]
+
         if (methodElement !is ExecutableElement) {
-            MessagerUtils.reportError(methodElement, "Only method annotations are supported")
+            MessagerUtils.reportError(methodElement, "Interface must contain one method")
             return false
         }
 
         if (methodElement.returnType.toString() != String::class.java.name.replace('$', '.')) {
-            MessagerUtils.reportError(methodElement, "Interface must have a String return type")
+            MessagerUtils.reportError(methodElement, "Interface's single method must have a String return type")
             return false
         }
 

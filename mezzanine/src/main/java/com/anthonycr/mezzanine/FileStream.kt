@@ -11,7 +11,7 @@ package com.anthonycr.mezzanine
  *
  * Created by anthonycr on 5/22/17.
  */
-@Target(AnnotationTarget.FUNCTION, AnnotationTarget.PROPERTY_GETTER, AnnotationTarget.PROPERTY_SETTER)
+@Target(AnnotationTarget.CLASS, AnnotationTarget.PROPERTY_GETTER, AnnotationTarget.PROPERTY_SETTER)
 annotation class FileStream(
         /**
          * The relative path to the file from

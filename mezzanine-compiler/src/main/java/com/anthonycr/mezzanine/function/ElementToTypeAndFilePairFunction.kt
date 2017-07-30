@@ -21,9 +21,8 @@ object ElementToTypeAndFilePairFunction : Function<Element, Pair<TypeElement, Fi
     }
 
     override fun apply(element: Element): Pair<TypeElement, File> {
-        val enclosingElement = element.enclosingElement
 
-        require(enclosingElement is TypeElement)
+        require(element is TypeElement)
 
         val filePath = element.getAnnotation(FileStream::class.java).value
 
@@ -38,7 +37,7 @@ object ElementToTypeAndFilePairFunction : Function<Element, Pair<TypeElement, Fi
             MessagerUtils.reportError(element, "File does not exist")
         }
 
-        return Pair(enclosingElement as TypeElement, file)
+        return Pair(element as TypeElement, file)
     }
 
 }
