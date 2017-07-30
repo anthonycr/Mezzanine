@@ -20,18 +20,26 @@ about escaping the `String` contents or losing formatting. You can edit within t
 
 ### Usage
 
+```groovy
+allprojects {
+    repositories {
+        maven { url "https://dl.bintray.com/anthonycr/android/" }
+    }
+}
+```
+
 ##### Android/Java
 ```groovy
-compile project(':mezzanine')
-annotationProcessor project(':mezzanine-compiler')
+compile 'com.anthonycr.mezzanine:mezzanine:1.0.0'
+annotationProcessor 'com.anthonycr.mezzanine:mezzanine-compiler:1.0.0'
 ```
 
 ##### Android/Kotlin
 ```groovy
 apply plugin: 'kotlin-kapt'
 
-compile project(':mezzanine')
-kapt project(':mezzanine-compiler')
+compile 'com.anthonycr.mezzanine:mezzanine:1.0.0'
+kapt 'com.anthonycr.mezzanine:mezzanine-compiler:1.0.0'
 ```
 
 ##### Java
@@ -41,8 +49,8 @@ plugins {
 }
 
 dependencies {
-    compile project(':mezzanine')
-    apt project(':mezzanine-compiler')
+    compile 'com.anthonycr.mezzanine:mezzanine:1.0.0'
+    apt 'com.anthonycr.mezzanine:mezzanine-compiler:1.0.0'
 }
 ```
 
