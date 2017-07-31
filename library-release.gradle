@@ -7,6 +7,18 @@ def version = project.versionName
 
 def localReleaseDest = "${buildDir}/release/${version}"
 
+task javadocs(type: Javadoc) {
+    failOnError false
+}
+
+task javadocsJar(type: Jar, dependsOn: javadocs) {
+    classifier = 'javadoc'
+}
+
+task sourcesJar(type: Jar) {
+    classifier = 'sources'
+}
+
 uploadArchives {
     repositories.mavenDeployer {
         pom.groupId = groupId
@@ -33,3 +45,8 @@ generateRelease.doLast {
 
 generateRelease.dependsOn(uploadArchives)
 generateRelease.dependsOn(zipRelease)
+
+artifacts {
+    archives sourcesJar
+    archives javadocsJar
+}
