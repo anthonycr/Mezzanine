@@ -9,7 +9,6 @@ import javax.annotation.processing.Filer
  * Utils used to write a [JavaFile]
  * to a file.
  *
- *
  * Created by anthonycr on 5/22/17.
  */
 object FileGenUtils {
