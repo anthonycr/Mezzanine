@@ -7,7 +7,6 @@ import javax.tools.Diagnostic.Kind
 /**
  * Utils to communicate with the compiler.
  *
- *
  * Created by anthonycr on 5/22/17.
  */
 object MessagerUtils {
