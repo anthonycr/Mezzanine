@@ -6,25 +6,18 @@ import java.io.Writer
 import javax.annotation.processing.Filer
 
 /**
- * Utils used to write a [JavaFile]
- * to a file.
- *
- * Created by anthonycr on 5/22/17.
+ * Utils used to write a [JavaFile] to a file.
  */
 object FileGenUtils {
 
     lateinit var filer: Filer
 
     /**
-     * Writes a Java file to the file system after
-     * deleting the previous copy.
-
+     * Writes a Java file to the file system after deleting the previous copy.
+     *
      * @param file  the file to write.
-     * *
-     * @param filer the Filer to use to do the writing.
-     * *
-     * @throws IOException throws an exception if we are unable
-     * *                     to write the file to the filesystem.
+     *
+     * @throws IOException throws an exception if we are unable to write the file to the filesystem.
      */
     @Throws(IOException::class)
     fun writeToFile(file: JavaFile) {
