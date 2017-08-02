@@ -6,11 +6,7 @@ import javax.annotation.processing.RoundEnvironment
 import javax.lang.model.element.Element
 
 /**
- * An element source that provides a stream
- * of elements annotated with the [FileStream]
- * annotation.
- *
- * Created by anthonycr on 5/22/17.
+ * An element source that provides a stream of elements annotated with the [FileStream] annotation.
  */
 class MezzanineElementSource(private val roundEnvironment: RoundEnvironment) {
 

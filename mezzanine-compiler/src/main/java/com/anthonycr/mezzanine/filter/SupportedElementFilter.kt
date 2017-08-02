@@ -7,14 +7,9 @@ import javax.lang.model.element.ElementKind
 import javax.lang.model.element.ExecutableElement
 
 /**
- * Filters a list of elements for only
- * the elements supported by Mezzanine.
- * If unsupported elements are in the stream,
- * it will report a message to the
- * [MessagerUtils] so that the consumer
- * knows what they have done wrong.
- *
- * Created by anthonycr on 5/22/17.
+ * Filters a list of elements for only the elements supported by Mezzanine. If unsupported elements
+ * are in the stream, it will report a message to the [MessagerUtils] so that the consumer knows
+ * what they have done wrong.
  */
 object SupportedElementFilter : Predicate<Element> {
 

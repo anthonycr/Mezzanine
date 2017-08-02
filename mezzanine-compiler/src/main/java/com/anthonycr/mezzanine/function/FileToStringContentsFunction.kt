@@ -7,10 +7,8 @@ import java.nio.file.Files
 import javax.lang.model.element.TypeElement
 
 /**
- * A mapping function that takes a stream of
- * interfaces and files and reads in the file,
- * emitting an stream of interfaces and file
- * contents (as strings).
+ * A mapping function that takes a stream of interfaces and files and reads in the file, emitting an
+ * stream of interfaces and file contents (as strings).
  */
 object FileToStringContentsFunction : Function<Pair<TypeElement, File>, Pair<TypeElement, String>> {
 

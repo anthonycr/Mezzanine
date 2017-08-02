@@ -9,10 +9,8 @@ import javax.lang.model.element.Element
 import javax.lang.model.element.TypeElement
 
 /**
- * A mapping function that takes a stream of
- * supported elements (methods) and maps them
- * to their enclosing interfaces and the files
- * represented by the method annotations.
+ * A mapping function that takes a stream of supported elements (methods) and maps them to their
+ * enclosing interfaces and the files represented by the method annotations.
  */
 object ElementToTypeAndFilePairFunction : Function<Element, Pair<TypeElement, File>> {
 
