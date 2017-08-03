@@ -24,7 +24,7 @@ about escaping the `String` contents or losing formatting. You can edit within t
 ```groovy
 allprojects {
     repositories {
-        maven { url "https://dl.bintray.com/anthonycr/android/" }
+        bintray()
     }
 }
 ```
