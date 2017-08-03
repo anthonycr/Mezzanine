@@ -35,7 +35,7 @@ compile 'com.anthonycr.mezzanine:mezzanine:1.0.0'
 annotationProcessor 'com.anthonycr.mezzanine:mezzanine-compiler:1.0.0'
 ```
 
-##### Android/Kotlin
+##### Kotlin
 ```groovy
 apply plugin: 'kotlin-kapt'
 
