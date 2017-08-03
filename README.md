@@ -2,6 +2,7 @@
 An annotation processor that allows you to read static UTF-8 files synchronously.
 
 [![Build Status](https://travis-ci.org/anthonycr/Mezzanine.svg?branch=master)](https://travis-ci.org/anthonycr/Mezzanine)
+[![Download](https://api.bintray.com/packages/anthonycr/android/com.anthonycr.mezzanine%3Amezzanine/images/download.svg)](https://bintray.com/anthonycr/android/com.anthonycr.mezzanine%3Amezzanine)
 
 ### What does this do?
 A frequent scenario for Android apps is to need to read in a default configuration file on startup and
