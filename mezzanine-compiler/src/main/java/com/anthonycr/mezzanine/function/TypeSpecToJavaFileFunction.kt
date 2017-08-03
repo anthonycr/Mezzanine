@@ -6,9 +6,7 @@ import com.squareup.javapoet.TypeSpec
 import io.reactivex.functions.Function
 
 /**
- * Generates a [JavaFile] from
- * a [TypeSpec], [PACKAGE_NAME]
- * will be used as the package name.
+ * Generates a [JavaFile] from a [TypeSpec], [PACKAGE_NAME] will be used as the package name.
  */
 object TypeSpecToJavaFileFunction : Function<TypeSpec, JavaFile> {
 

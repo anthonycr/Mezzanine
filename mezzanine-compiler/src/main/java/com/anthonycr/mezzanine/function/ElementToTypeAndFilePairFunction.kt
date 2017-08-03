@@ -9,10 +9,8 @@ import javax.lang.model.element.Element
 import javax.lang.model.element.TypeElement
 
 /**
- * A mapping function that takes a stream of
- * supported elements (methods) and maps them
- * to their enclosing interfaces and the files
- * represented by the method annotations.
+ * A mapping function that takes a stream of supported elements (methods) and maps them to their
+ * enclosing interfaces and the files represented by the method annotations.
  */
 object ElementToTypeAndFilePairFunction : Function<Element, Pair<TypeElement, File>> {
 
@@ -21,9 +19,8 @@ object ElementToTypeAndFilePairFunction : Function<Element, Pair<TypeElement, Fi
     }
 
     override fun apply(element: Element): Pair<TypeElement, File> {
-        val enclosingElement = element.enclosingElement
 
-        require(enclosingElement is TypeElement)
+        require(element is TypeElement)
 
         val filePath = element.getAnnotation(FileStream::class.java).value
 
@@ -38,7 +35,7 @@ object ElementToTypeAndFilePairFunction : Function<Element, Pair<TypeElement, Fi
             MessagerUtils.reportError(element, "File does not exist")
         }
 
-        return Pair(enclosingElement as TypeElement, file)
+        return Pair(element as TypeElement, file)
     }
 
 }
