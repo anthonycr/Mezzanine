@@ -4,8 +4,10 @@ project.ext {
     publishArtifactId = project.baseArtifactId
 }
 
-sourceCompatibility = "1.7"
-targetCompatibility = "1.7"
+compileJava {
+    sourceCompatibility = "1.7"
+    targetCompatibility = "1.7"
+}
 
 // gradlew clean build generateRelease
 apply plugin: 'maven'

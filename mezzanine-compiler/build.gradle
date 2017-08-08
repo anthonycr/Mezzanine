@@ -28,10 +28,14 @@ dependencies {
     testCompile 'junit:junit:4.12'
     testCompile 'org.assertj:assertj-core:3.8.0'
     testCompile 'org.mockito:mockito-android:2.8.47'
+    testCompile 'com.google.testing.compile:compile-testing:0.8'
+
 }
 
-sourceCompatibility = "1.8"
-targetCompatibility = "1.8"
+compileJava {
+    sourceCompatibility = "1.8"
+    targetCompatibility = "1.8"
+}
 
 // gradlew clean build generateRelease
 apply plugin: 'maven'
