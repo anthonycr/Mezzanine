@@ -1,5 +1,6 @@
 apply plugin: 'kotlin'
 apply plugin: 'kotlin-kapt'
+apply plugin: 'jacoco'
 
 project.ext {
     publishArtifactId = "${project.baseArtifactId}-compiler"
@@ -35,6 +36,10 @@ dependencies {
 compileJava {
     sourceCompatibility = "1.8"
     targetCompatibility = "1.8"
+}
+
+jacoco {
+    toolVersion = '0.7.9' // See http://www.eclemma.org/jacoco/
 }
 
 // gradlew clean build generateRelease
