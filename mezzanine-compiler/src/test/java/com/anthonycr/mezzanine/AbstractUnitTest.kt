@@ -1,4 +1,4 @@
-package com.anthonycr.mezzanine.filter
+package com.anthonycr.mezzanine
 
 import com.anthonycr.mezzanine.utils.MessagerUtils
 import com.google.testing.compile.CompilationRule

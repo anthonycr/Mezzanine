@@ -1,6 +1,5 @@
-package com.anthonycr.mezzanine.filter
+package com.anthonycr.mezzanine
 
-import com.anthonycr.mezzanine.MezzanineProcessor
 import org.junit.Test
 import testcase.InvalidFileTestCase
 import testcase.ValidFileTestCase

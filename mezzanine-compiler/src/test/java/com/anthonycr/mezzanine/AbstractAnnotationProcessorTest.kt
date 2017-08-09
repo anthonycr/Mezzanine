@@ -18,7 +18,7 @@
  * limitations under the License.
  * ====================================================================
  */
-package com.anthonycr.mezzanine.filter
+package com.anthonycr.mezzanine
 
 import org.junit.Assert.assertFalse
 import org.junit.Assert.assertTrue

@@ -1,5 +1,6 @@
 package com.anthonycr.mezzanine.filter
 
+import com.anthonycr.mezzanine.AbstractUnitTest
 import org.assertj.core.api.Assertions
 import org.junit.Test
 import org.mockito.Mockito
