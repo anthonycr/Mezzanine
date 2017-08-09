@@ -21,3 +21,6 @@ install:
 script:
   - ./gradlew :sample:assembleDebug --stacktrace
   - ./gradlew :mezzanine-compiler:test --stacktrace
+  - ./gradlew jacocoTestReport --stacktrace
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
