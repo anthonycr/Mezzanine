@@ -24,8 +24,6 @@ object ElementToTypeAndFilePairFunction : Function<Element, Pair<TypeElement, Fi
 
         val filePath = element.getAnnotation(FileStream::class.java).value
 
-        requireNotNull(filePath)
-
         val currentRelativePath = Paths.get("")
 
         val absoluteFilePath = "${currentRelativePath.toAbsolutePath()}${prependSlashIfNecessary(filePath)}"
