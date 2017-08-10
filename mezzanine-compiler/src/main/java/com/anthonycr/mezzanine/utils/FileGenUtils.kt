@@ -2,7 +2,6 @@ package com.anthonycr.mezzanine.utils
 
 import com.squareup.javapoet.JavaFile
 import java.io.IOException
-import java.io.Writer
 import javax.annotation.processing.Filer
 
 /**
@@ -24,26 +23,13 @@ object FileGenUtils {
         val fileName = if (file.packageName.isEmpty()) file.typeSpec.name else file.packageName + '.' + file.typeSpec.name
         val originatingElements = file.typeSpec.originatingElements
         val filerSourceFile = filer.createSourceFile(fileName, *originatingElements.toTypedArray())
+
         filerSourceFile.delete()
-        var writer: Writer? = null
-        try {
-            writer = filerSourceFile.openWriter()
-            file.writeTo(writer!!)
-        } catch (e: Exception) {
-            try {
-                filerSourceFile.delete()
-            } catch (ignored: Exception) {
-            }
 
-            throw e
-        } finally {
-            if (writer != null) {
-                try {
-                    writer.close()
-                } catch (ignored: IOException) {
-                }
+        val writer = filerSourceFile.openWriter()
 
-            }
+        writer.use {
+            file.writeTo(writer)
         }
     }
 }
