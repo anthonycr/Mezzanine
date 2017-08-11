@@ -31,10 +31,6 @@ object ElementToTypeAndFilePairFunction : (Element) -> Pair<TypeElement, File> {
         val absoluteFilePath = "${currentRelativePath.toAbsolutePath()}${prependSlashIfNecessary(filePath)}"
         val file = File(absoluteFilePath)
 
-        if (!file.exists()) {
-            MessagerUtils.reportError(element, "File does not exist")
-        }
-
         return Pair(element as TypeElement, file)
     }
 
