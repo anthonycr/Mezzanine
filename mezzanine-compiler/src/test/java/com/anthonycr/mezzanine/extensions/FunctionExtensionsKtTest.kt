@@ -15,7 +15,7 @@ class FunctionExtensionsKtTest {
 
         val listTwo = mutableListOf<String>()
 
-        val listThree = listOne.doOnNext { listTwo.add(it) }
+        val listThree = listOne.asSequence().doOnNext { listTwo.add(it) }.toList()
 
         Assertions.assertThat(listOne).isEqualTo(listTwo)
         Assertions.assertThat(listOne).isEqualTo(listThree)
