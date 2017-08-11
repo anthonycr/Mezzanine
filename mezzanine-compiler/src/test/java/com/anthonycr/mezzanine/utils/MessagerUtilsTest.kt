@@ -9,13 +9,13 @@ import javax.lang.model.element.Element
  */
 class MessagerUtilsTest {
 
-    @Test(expected = IllegalArgumentException::class)
+    @Test(expected = UninitializedPropertyAccessException::class)
     fun test_ReportError_UninitializedMessager_ThrowsException() {
         val element = Mockito.mock(Element::class.java)
         MessagerUtils.reportError(element, "Test error")
     }
 
-    @Test(expected = IllegalArgumentException::class)
+    @Test(expected = UninitializedPropertyAccessException::class)
     fun test_ReportInfo_UninitializedMessager_ThrowsException() {
         MessagerUtils.reportInfo("Test message")
     }
