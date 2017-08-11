@@ -47,6 +47,7 @@ class MezzanineProcessor : AbstractProcessor() {
                 .doOnNext { typeElementFileEntry -> MessagerUtils.reportInfo("Processing file: " + typeElementFileEntry.second) }
                 .map(FileToStringContentsFunction)
                 .map(GenerateFileStreamTypeSpecFunction)
+                .toList()
                 .run(GenerateMezzanineTypeSpecFunction)
                 .run(TypeSpecToJavaFileFunction)
                 .run { FileGenUtils.writeToDisk(this) }

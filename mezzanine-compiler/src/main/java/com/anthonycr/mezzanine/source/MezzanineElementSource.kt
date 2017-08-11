@@ -13,6 +13,6 @@ class MezzanineElementSource(private val roundEnvironment: RoundEnvironment) {
      *
      * @return a valid set of elements.
      */
-    fun createElementStream() = roundEnvironment.getElementsAnnotatedWith(FileStream::class.java)
+    fun createElementStream() = roundEnvironment.getElementsAnnotatedWith(FileStream::class.java).asSequence()
 
 }
