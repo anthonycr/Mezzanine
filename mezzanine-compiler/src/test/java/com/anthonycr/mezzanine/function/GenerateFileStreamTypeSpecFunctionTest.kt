@@ -15,7 +15,7 @@ class GenerateFileStreamTypeSpecFunctionTest {
         val typeElement = Mockito.mock(TypeElement::class.java)
         Mockito.`when`(typeElement.enclosedElements).thenReturn(mutableListOf())
 
-        GenerateFileStreamTypeSpecFunction.apply(Pair(typeElement, ""))
+        GenerateFileStreamTypeSpecFunction.invoke(Pair(typeElement, ""))
     }
 
     @Test(expected = ClassCastException::class)
@@ -24,7 +24,7 @@ class GenerateFileStreamTypeSpecFunctionTest {
         val field = Mockito.mock(VariableElement::class.java)
         Mockito.`when`(typeElement.enclosedElements).thenReturn(mutableListOf(field))
 
-        GenerateFileStreamTypeSpecFunction.apply(Pair(typeElement, ""))
+        GenerateFileStreamTypeSpecFunction.invoke(Pair(typeElement, ""))
     }
 
 }

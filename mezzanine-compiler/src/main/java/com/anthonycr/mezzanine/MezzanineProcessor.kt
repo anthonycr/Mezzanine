@@ -1,5 +1,7 @@
 package com.anthonycr.mezzanine
 
+import com.anthonycr.mezzanine.extensions.doOnNext
+import com.anthonycr.mezzanine.extensions.with
 import com.anthonycr.mezzanine.filter.SupportedElementFilter
 import com.anthonycr.mezzanine.function.*
 import com.anthonycr.mezzanine.source.MezzanineElementSource
@@ -45,10 +47,10 @@ class MezzanineProcessor : AbstractProcessor() {
                 .map(FileToStringContentsFunction)
                 .map(GenerateFileStreamTypeSpecFunction)
                 .toList()
-                .map(GenerateMezzanineTypeSpecFunction)
-                .map(TypeSpecToJavaFileFunction)
-                .flatMapCompletable(WriteFileToDiskFunction)
-                .subscribe { MessagerUtils.reportInfo("File successfully processed") }
+                .with(GenerateMezzanineTypeSpecFunction)
+                .with(TypeSpecToJavaFileFunction)
+                .with { FileGenUtils.writeToDisk(it) }
+                .with { MessagerUtils.reportInfo("File successfully processed") }
 
         return true
     }

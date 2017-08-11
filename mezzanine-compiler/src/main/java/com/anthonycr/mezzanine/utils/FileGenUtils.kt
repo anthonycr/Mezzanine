@@ -19,7 +19,7 @@ object FileGenUtils {
      * @throws IOException throws an exception if we are unable to write the file to the filesystem.
      */
     @Throws(IOException::class)
-    fun writeToFile(file: JavaFile) {
+    fun writeToDisk(file: JavaFile) {
         val fileName = if (file.packageName.isEmpty()) file.typeSpec.name else file.packageName + '.' + file.typeSpec.name
         val originatingElements = file.typeSpec.originatingElements
         val filerSourceFile = filer.createSourceFile(fileName, *originatingElements.toTypedArray())

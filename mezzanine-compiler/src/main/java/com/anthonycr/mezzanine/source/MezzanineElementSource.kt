@@ -1,9 +1,7 @@
 package com.anthonycr.mezzanine.source
 
 import com.anthonycr.mezzanine.FileStream
-import io.reactivex.Flowable
 import javax.annotation.processing.RoundEnvironment
-import javax.lang.model.element.Element
 
 /**
  * An element source that provides a stream of elements annotated with the [FileStream] annotation.
@@ -13,11 +11,8 @@ class MezzanineElementSource(private val roundEnvironment: RoundEnvironment) {
     /**
      * A stream of elements.
      *
-     * @return a valid observable.
+     * @return a valid set of elements.
      */
-    fun createElementStream(): Flowable<Element> {
-        val elements = roundEnvironment.getElementsAnnotatedWith(FileStream::class.java)
+    fun createElementStream() = roundEnvironment.getElementsAnnotatedWith(FileStream::class.java)
 
-        return Flowable.fromIterable(elements)
-    }
 }
