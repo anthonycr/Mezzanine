@@ -2,17 +2,16 @@ package com.anthonycr.mezzanine.function
 
 import com.squareup.javapoet.MethodSpec
 import com.squareup.javapoet.TypeSpec
-import io.reactivex.functions.Function
 import javax.lang.model.element.Modifier
 
 /**
  * Generates the Mezzanine [TypeSpec] from a list of [TypeSpec].
  */
-object GenerateMezzanineTypeSpecFunction : Function<List<TypeSpec>, TypeSpec> {
+object GenerateMezzanineTypeSpecFunction : (List<TypeSpec>) -> TypeSpec {
 
     private const val CLASS_NAME = "MezzanineGenerator"
 
-    override fun apply(typeSpecs: List<TypeSpec>): TypeSpec {
+    override fun invoke(typeSpecs: List<TypeSpec>): TypeSpec {
         val mezzanineConstructorBuilder = MethodSpec.constructorBuilder()
                 .addModifiers(Modifier.PRIVATE)
 
@@ -25,4 +24,5 @@ object GenerateMezzanineTypeSpecFunction : Function<List<TypeSpec>, TypeSpec> {
 
         return mezzanineTypeSpecBuilder.build()
     }
+
 }

@@ -28,7 +28,7 @@ class SupportedElementFilterTest : AbstractUnitTest() {
                             enclosedElements = arrayOf(mockMethod)
                     )
 
-                    Assertions.assertThat(SupportedElementFilter.test(mockElement)).isFalse()
+                    Assertions.assertThat(SupportedElementFilter.invoke(mockElement)).isFalse()
                 }
 
         // Train
@@ -39,7 +39,7 @@ class SupportedElementFilterTest : AbstractUnitTest() {
         )
 
         // Verify
-        Assertions.assertThat(SupportedElementFilter.test(mockElement)).isTrue()
+        Assertions.assertThat(SupportedElementFilter.invoke(mockElement)).isTrue()
     }
 
     @Test
@@ -56,7 +56,7 @@ class SupportedElementFilterTest : AbstractUnitTest() {
                             enclosedElements = arrayOf(mockMethod)
                     )
 
-                    Assertions.assertThat(SupportedElementFilter.test(mockElement)).isFalse()
+                    Assertions.assertThat(SupportedElementFilter.invoke(mockElement)).isFalse()
                 }
 
         // Train
@@ -67,7 +67,7 @@ class SupportedElementFilterTest : AbstractUnitTest() {
         )
 
         // Verify
-        Assertions.assertThat(SupportedElementFilter.test(mockElement)).isTrue()
+        Assertions.assertThat(SupportedElementFilter.invoke(mockElement)).isTrue()
     }
 
     @Test
@@ -82,7 +82,7 @@ class SupportedElementFilterTest : AbstractUnitTest() {
         )
 
         // Verify
-        Assertions.assertThat(SupportedElementFilter.test(mockElement)).isFalse()
+        Assertions.assertThat(SupportedElementFilter.invoke(mockElement)).isFalse()
 
         // Train - 1 method
         mockElement.mockReturns(
@@ -92,7 +92,7 @@ class SupportedElementFilterTest : AbstractUnitTest() {
         )
 
         // Verify
-        Assertions.assertThat(SupportedElementFilter.test(mockElement)).isTrue()
+        Assertions.assertThat(SupportedElementFilter.invoke(mockElement)).isTrue()
 
         // Train - 2 methods
         mockElement.mockReturns(
@@ -102,7 +102,7 @@ class SupportedElementFilterTest : AbstractUnitTest() {
         )
 
         // Verify
-        Assertions.assertThat(SupportedElementFilter.test(mockElement)).isFalse()
+        Assertions.assertThat(SupportedElementFilter.invoke(mockElement)).isFalse()
     }
 
     @Test
@@ -118,7 +118,7 @@ class SupportedElementFilterTest : AbstractUnitTest() {
         )
 
         // Verify
-        Assertions.assertThat(SupportedElementFilter.test(mockElement)).isFalse()
+        Assertions.assertThat(SupportedElementFilter.invoke(mockElement)).isFalse()
 
         // Train
         mockMethod.mockReturns(String::class.java)
@@ -129,7 +129,7 @@ class SupportedElementFilterTest : AbstractUnitTest() {
         )
 
         // Verify
-        Assertions.assertThat(SupportedElementFilter.test(mockElement)).isTrue()
+        Assertions.assertThat(SupportedElementFilter.invoke(mockElement)).isTrue()
     }
 
     @Test
@@ -143,7 +143,7 @@ class SupportedElementFilterTest : AbstractUnitTest() {
         )
 
         // Verify
-        Assertions.assertThat(SupportedElementFilter.test(mockElement)).isFalse()
+        Assertions.assertThat(SupportedElementFilter.invoke(mockElement)).isFalse()
 
         // Train
         mockMethod.mockReturns(String::class.java)
@@ -154,7 +154,7 @@ class SupportedElementFilterTest : AbstractUnitTest() {
         )
 
         // Verify
-        Assertions.assertThat(SupportedElementFilter.test(mockElement)).isTrue()
+        Assertions.assertThat(SupportedElementFilter.invoke(mockElement)).isTrue()
     }
 
     private fun <T> ExecutableElement.mockReturns(clazz: Class<T>) {
