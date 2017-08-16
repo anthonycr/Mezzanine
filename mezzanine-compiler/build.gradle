@@ -13,7 +13,7 @@ dependencies {
 
     // code generation
     compile 'com.squareup:javapoet:1.8.0'
-    compile 'org.apache.commons:commons-lang3:3.0'
+    compile 'org.apache.commons:commons-text:1.1'
 
     // kotlin
     compile "org.jetbrains.kotlin:kotlin-stdlib-jre8:$kotlin_version"
