@@ -106,7 +106,8 @@ abstract class AbstractAnnotationProcessorTest {
         }
 
         val diagnosticCollector = DiagnosticCollector<JavaFileObject>()
-        val fileManager = COMPILER.getStandardFileManager(diagnosticCollector, null, null)
+        val javaFileManager = COMPILER.getStandardFileManager(diagnosticCollector, null, null)
+        val fileManager = CleanableJavaFileManager(javaFileManager)
 
         val compileArgs = ArrayList<String>()
         compileArgs.add("-proc:only")
@@ -123,7 +124,7 @@ abstract class AbstractAnnotationProcessorTest {
          */
         val task = COMPILER.getTask(null, fileManager, diagnosticCollector,
                 compileArgs, null,
-                fileManager.getJavaFileObjectsFromFiles(compilationUnits))
+                javaFileManager.getJavaFileObjectsFromFiles(compilationUnits))
         task.setProcessors(getProcessors())
         task.call()
 
