@@ -79,3 +79,14 @@ artifacts {
     archives sourcesJar
     archives javadocsJar
 }
+
+compileKotlin {
+    kotlinOptions {
+        jvmTarget = "1.6"
+    }
+}
+compileTestKotlin {
+    kotlinOptions {
+        jvmTarget = "1.6"
+    }
+}
