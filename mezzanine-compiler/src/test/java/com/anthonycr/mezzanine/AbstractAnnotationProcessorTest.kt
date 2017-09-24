@@ -57,9 +57,8 @@ abstract class AbstractAnnotationProcessorTest {
      *  as demonstrated in the documentation for [JavaCompiler]
      * @see .compileTestCase
      */
-    protected fun compileTestCase(vararg compilationUnits: Class<*>): List<Diagnostic<out JavaFileObject>> {
-        return compileTestCase(Arrays.asList("-Adsljson.showdsl=true"), *compilationUnits)
-    }
+    protected fun compileTestCase(vararg compilationUnits: Class<*>): List<Diagnostic<out JavaFileObject>> =
+            compileTestCase(Arrays.asList("-Adsljson.showdsl=true"), *compilationUnits)
 
     /**
      * Attempts to compile the given compilation units using the Java Compiler
@@ -94,10 +93,8 @@ abstract class AbstractAnnotationProcessorTest {
      */
     protected fun compileTestCase(compilationUnitPaths: Array<String>,
                                   arguments: List<String>): List<Diagnostic<out JavaFileObject>> {
-        val compilationUnits: Collection<File>
-
-        try {
-            compilationUnits = findClasspathFiles(compilationUnitPaths)
+        val compilationUnits = try {
+            findClasspathFiles(compilationUnitPaths)
         } catch (exception: IOException) {
             throw IllegalArgumentException(
                     "Unable to resolve compilation units ${Arrays.toString(compilationUnitPaths)} due to: ${exception.message}",
@@ -146,9 +143,8 @@ abstract class AbstractAnnotationProcessorTest {
         private val SOURCE_FILE_SUFFIX = ".java"
         private val COMPILER = ToolProvider.getSystemJavaCompiler()
 
-        private fun toResourcePath(clazz: Class<*>): String {
-            return clazz.name.replace('.', '/') + SOURCE_FILE_SUFFIX
-        }
+        private fun toResourcePath(clazz: Class<*>): String =
+                clazz.name.replace('.', '/') + SOURCE_FILE_SUFFIX
 
         @JvmStatic
         @Throws(IOException::class)
@@ -181,9 +177,8 @@ abstract class AbstractAnnotationProcessorTest {
          * @see .assertCompilationReturned
          */
         @JvmStatic
-        protected fun assertCompilationSuccessful(diagnostics: List<Diagnostic<out JavaFileObject>>) {
-            diagnostics.forEach { assertFalse(it.getMessage(Locale.ENGLISH), it.kind == Kind.ERROR) }
-        }
+        protected fun assertCompilationSuccessful(diagnostics: List<Diagnostic<out JavaFileObject>>) =
+                diagnostics.forEach { assertFalse(it.getMessage(Locale.ENGLISH), it.kind == Kind.ERROR) }
 
         /**
          * Asserts that the compilation produced results of the following

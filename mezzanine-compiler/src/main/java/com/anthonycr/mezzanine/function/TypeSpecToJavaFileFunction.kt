@@ -11,8 +11,7 @@ object TypeSpecToJavaFileFunction : (TypeSpec) -> JavaFile {
 
     private const val PACKAGE_NAME = "com.anthonycr.mezzanine"
 
-    override fun invoke(typeSpec: TypeSpec): JavaFile {
-        return JavaFile.builder(PACKAGE_NAME, typeSpec).build()
-    }
+    override fun invoke(typeSpec: TypeSpec): JavaFile =
+            JavaFile.builder(PACKAGE_NAME, typeSpec).build()
 
 }

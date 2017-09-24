@@ -9,9 +9,8 @@ import javax.lang.model.element.TypeElement
 /**
  * Adds a slash to the beginning of a path string if one does not exist there.
  */
-private fun prependSlashIfNecessary(path: String): String {
-    return "${(if (path.startsWith("/")) "" else "/")}$path"
-}
+private fun prependSlashIfNecessary(path: String): String =
+        "${(if (path.startsWith("/")) "" else "/")}$path"
 
 /**
  * A mapping function that takes a stream of supported elements (methods) and maps them to their

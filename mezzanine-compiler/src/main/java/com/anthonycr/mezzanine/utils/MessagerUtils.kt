@@ -18,17 +18,14 @@ object MessagerUtils {
      *
      * @param message the error message.
      */
-    fun reportError(element: Element, message: String) {
-        messager.printMessage(Kind.ERROR, message, element)
-    }
+    fun reportError(element: Element, message: String) =
+            messager.printMessage(Kind.ERROR, message, element)
 
     /**
      * Log info to the compiler to provide context to the process.
      *
      * @param message the message to log.
      */
-    fun reportInfo(message: String) {
-        messager.printMessage(Kind.NOTE, message)
-    }
+    fun reportInfo(message: String) = messager.printMessage(Kind.NOTE, message)
 
 }
