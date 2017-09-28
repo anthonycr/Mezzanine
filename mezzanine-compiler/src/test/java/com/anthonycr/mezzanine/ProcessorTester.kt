@@ -40,6 +40,3 @@ class ProcessorTester(private val processor: () -> Processor) {
 }
 
 private fun KClass<*>.asResourcePath(): String = "${this.java.name.replace('.', '/')}.java"
-
-fun Compilation.isSuccessful() = this.status() == Compilation.Status.SUCCESS
-
