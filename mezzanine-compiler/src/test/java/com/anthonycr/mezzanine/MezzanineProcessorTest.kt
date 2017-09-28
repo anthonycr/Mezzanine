@@ -1,37 +1,31 @@
 package com.anthonycr.mezzanine
 
+import org.assertj.core.api.Assertions.assertThat
 import org.junit.Test
 import testcase.InvalidFileTestCase
 import testcase.ValidFileExtraSlashTestCase
 import testcase.ValidFileTestCase
-import javax.tools.Diagnostic
 
 /**
  * Unit tests for [MezzanineProcessor].
  */
-class MezzanineProcessorTest : AbstractAnnotationProcessorTest() {
+class MezzanineProcessorTest {
 
-    override fun getProcessors() = arrayListOf(MezzanineProcessor())
+    private val processorTester = ProcessorTester({ MezzanineProcessor() })
 
     @Test
-    fun test_ValidFileCase_Succeeds() {
-        val output = compileTestCase(ValidFileTestCase::class.java)
-
-        assertCompilationSuccessful(output)
+    fun `ValidFileTestCase compilation succeeds`() {
+        assertThat(processorTester.compile(ValidFileTestCase::class).isSuccessful()).isTrue()
     }
 
     @Test
-    fun testValidFileExtraSlashCase_Succeeds() {
-        val output = compileTestCase(ValidFileExtraSlashTestCase::class.java)
-
-        assertCompilationSuccessful(output)
+    fun `ValidFileExtraSlashTestCase compilation succeeds`() {
+        assertThat(processorTester.compile(ValidFileExtraSlashTestCase::class).isSuccessful()).isTrue()
     }
 
     @Test
-    fun test_InvalidFileCase_Fails() {
-        val output = compileTestCase(InvalidFileTestCase::class.java)
-
-        assertCompilationReturned(arrayOf(Diagnostic.Kind.ERROR), longArrayOf(9), output)
+    fun `InvalidFileTestCase compilation fails`() {
+        assertThat(processorTester.compile(InvalidFileTestCase::class).isSuccessful()).isFalse()
     }
 
 }
