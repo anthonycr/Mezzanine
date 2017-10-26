@@ -14,7 +14,7 @@ import kotlin.reflect.KClass
 class ProcessorTester(private val processor: () -> Processor) {
 
     private val classpathRoot = File(Thread.currentThread().contextClassLoader.getResource("").path)
-    private val projectRoot: File = classpathRoot.parentFile.parentFile.parentFile
+    private val projectRoot: File = classpathRoot.parentFile.parentFile.parentFile.parentFile
     private val javaRoot = File(File(File(projectRoot, "src"), "test"), "java")
     private val javaFileManager = ToolProvider.getSystemJavaCompiler().getStandardFileManager(DiagnosticCollector(), null, null)
 
