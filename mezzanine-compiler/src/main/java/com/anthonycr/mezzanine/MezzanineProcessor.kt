@@ -36,15 +36,14 @@ class MezzanineProcessor : AbstractProcessor() {
 
         isProcessed = true
 
-        val mezzanineElementSource = MezzanineElementSource(roundEnvironment)
-
         MessagerUtils.reportInfo("Starting Mezzanine processing")
 
-        mezzanineElementSource.createElementStream()
+        MezzanineElementSource(roundEnvironment)
+                .createElementStream()
                 .filter(SupportedElementFilter)
                 .map(ElementToTypeAndFilePairFunction)
                 .filter(NonExistentFileFilter)
-                .doOnNext { typeElementFileEntry -> MessagerUtils.reportInfo("Processing file: " + typeElementFileEntry.second) }
+                .doOnNext { typeElementFileEntry -> MessagerUtils.reportInfo("Processing file: ${typeElementFileEntry.second}") }
                 .map(FileToStringContentsFunction)
                 .map(GenerateFileStreamTypeSpecFunction)
                 .toList()
