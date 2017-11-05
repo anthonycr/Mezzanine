@@ -4,12 +4,8 @@ jdk:
   - oraclejdk8
 android:
   components:
-    - tools
-    - platform-tools
-    - build-tools-26.0.1
-    - android-26
-    - extra-android-support
-    - extra-android-m2repository
+    - build-tools-27.0.0
+    - android-27
   licenses:
     - 'android-sdk-license-.+'
     - '.*intel.+'
@@ -19,6 +15,8 @@ before_install:
 install:
   - ./gradlew
 script:
-  - ./gradlew :mezzanine:assemble --stacktrace
-  - ./gradlew :mezzanine-compiler:assemble --stacktrace
   - ./gradlew :sample:assembleDebug --stacktrace
+  - ./gradlew :mezzanine-compiler:test --stacktrace
+  - ./gradlew jacocoTestReport --stacktrace
+after_success:
+  - bash <(curl -s https://codecov.io/bash)

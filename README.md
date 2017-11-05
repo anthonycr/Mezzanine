@@ -2,44 +2,40 @@
 An annotation processor that allows you to read static UTF-8 files synchronously.
 
 [![Build Status](https://travis-ci.org/anthonycr/Mezzanine.svg?branch=master)](https://travis-ci.org/anthonycr/Mezzanine)
+[![Download](https://api.bintray.com/packages/anthonycr/android/com.anthonycr.mezzanine%3Amezzanine/images/download.svg)](https://bintray.com/anthonycr/android/com.anthonycr.mezzanine%3Amezzanine)
+[![codecov](https://codecov.io/gh/anthonycr/Mezzanine/branch/dev/graph/badge.svg)](https://codecov.io/gh/anthonycr/Mezzanine)
 
 ### What does this do?
-A frequent scenario for Android apps is to need to read in a default configuration file on startup and
-change functionality based on the contents of the configuration file. A convenient, frequently used way
-to store this configuration file is in assets, and then to read out of this file on startup. This can
-mean doing expensive disk I/O on the main thread - which can cause increased startup time and dropped frames.
+Android apps often need to read in a default configuration file on startup and change functionality based on the contents of the configuration file. A convenient, frequently used way to store this configuration file is in assets, and then to read out of this file on startup. This can mean doing expensive disk I/O on the main thread, which increases startup times. You can get around the additional I/O by pasting the contents of the file into a `String` constant, but this can make code review difficult.
 
-Mezzanine solves this problem by storing file contents in a `String` constant, which is loaded when the
-application is started, rather than requiring additional disk I/O after startup. It acts as an intermediary
-between files and your running Java code. This library is ideal for small files. There is also a hard limit
-in the javac compiler where `String` constants cannot exceed 65535 bytes in size.
+Mezzanine solves this problem by generating a class at compile time which stores the file contents in a `String` constant. This is loaded by the class loader, along with your code, when the application is started, rather than requiring additional disk I/O after startup. It acts as an intermediary between files and your running Java code. Instead of needing to paste the contents of the file into the constant yourself, you can store it in its own file and maintain proper separation. For instance, if you are executing JavaScript using a `WebView` or some library like `duktape`, you can store the files in `.js` files without the additional annoyance of needing to perform disk I/O.
 
-Of course, you may already be copying the contents of a file into a `String` and then reading it at runtime
-for the performance gain, but this can be a nuisance to maintain. Using Mezzanine, you don't have to worry
-about escaping the `String` contents or losing formatting. You can edit within the file, and then read from the method at runtime.
+Note: There is a hard limit set by the javac compiler where `String` constants cannot exceed `65535` bytes in size.
 
 ### Usage
 
 ```groovy
 allprojects {
     repositories {
-        maven { url "https://dl.bintray.com/anthonycr/android/" }
+        bintray()
     }
 }
 ```
 
 ##### Android/Java
 ```groovy
-compile 'com.anthonycr.mezzanine:mezzanine:1.0.0'
-annotationProcessor 'com.anthonycr.mezzanine:mezzanine-compiler:1.0.0'
+def mezzanineVersion = '1.0.0'
+compile "com.anthonycr.mezzanine:mezzanine:$mezzanineVersion"
+annotationProcessor "com.anthonycr.mezzanine:mezzanine-compiler:$mezzanineVersion"
 ```
 
-##### Android/Kotlin
+##### Kotlin
 ```groovy
 apply plugin: 'kotlin-kapt'
 
-compile 'com.anthonycr.mezzanine:mezzanine:1.0.0'
-kapt 'com.anthonycr.mezzanine:mezzanine-compiler:1.0.0'
+def mezzanineVersion = '1.0.0'
+compile "com.anthonycr.mezzanine:mezzanine:$mezzanineVersion"
+kapt "com.anthonycr.mezzanine:mezzanine-compiler:$mezzanineVersion"
 ```
 
 ##### Java
@@ -49,8 +45,9 @@ plugins {
 }
 
 dependencies {
-    compile 'com.anthonycr.mezzanine:mezzanine:1.0.0'
-    apt 'com.anthonycr.mezzanine:mezzanine-compiler:1.0.0'
+    def mezzanineVersion = '1.0.0'
+    compile "com.anthonycr.mezzanine:mezzanine:$mezzanineVersion"
+    apt "com.anthonycr.mezzanine:mezzanine-compiler:$mezzanineVersion"
 }
 ```
 
@@ -60,7 +57,7 @@ dependencies {
 - Annotate the interface with `@FileStream` and pass the path to the file as the value in the annotation.
 - Consume the generated implementation of the interface to get the file as a string.
 - Files are assumed to be encoded as `UTF-8`.
-- Files must be less than 65kB, otherwise javac will complain.
+- Files must be less than `65kB`, otherwise compilation will fail.
 
 ### Sample
 
