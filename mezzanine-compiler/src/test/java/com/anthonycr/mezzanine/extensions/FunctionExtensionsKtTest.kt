@@ -10,7 +10,7 @@ class FunctionExtensionsKtTest {
 
 
     @Test
-    fun test_DoOnNext() {
+    fun `doOnNext iterates through list and returns same list`() {
         val listOne = listOf("one", "two", "three")
 
         val listTwo = mutableListOf<String>()
