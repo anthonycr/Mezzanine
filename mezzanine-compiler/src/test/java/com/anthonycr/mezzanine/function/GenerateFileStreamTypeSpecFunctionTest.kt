@@ -11,7 +11,7 @@ import javax.lang.model.element.VariableElement
 class GenerateFileStreamTypeSpecFunctionTest {
 
     @Test(expected = IndexOutOfBoundsException::class)
-    fun test_TypeElementWithNoEnclosedElements_Fails() {
+    fun `TypeElement with no enclosed elements fails`() {
         val typeElement = Mockito.mock(TypeElement::class.java)
         Mockito.`when`(typeElement.enclosedElements).thenReturn(mutableListOf())
 
@@ -19,7 +19,7 @@ class GenerateFileStreamTypeSpecFunctionTest {
     }
 
     @Test(expected = ClassCastException::class)
-    fun test_TypeElementWithNonMethodElement_Fails() {
+    fun `TypeElement with non ExecutableElement fails`() {
         val typeElement = Mockito.mock(TypeElement::class.java)
         val field = Mockito.mock(VariableElement::class.java)
         Mockito.`when`(typeElement.enclosedElements).thenReturn(mutableListOf(field))
@@ -27,4 +27,11 @@ class GenerateFileStreamTypeSpecFunctionTest {
         GenerateFileStreamTypeSpecFunction.invoke(Pair(typeElement, ""))
     }
 
+    @Test(expected = TypeCastException::class)
+    fun `TypeElement with null enclosed element fails`() {
+        val typeElement = Mockito.mock(TypeElement::class.java)
+        Mockito.`when`(typeElement.enclosedElements).thenReturn(mutableListOf(null))
+
+        GenerateFileStreamTypeSpecFunction.invoke(Pair(typeElement, ""))
+    }
 }
