@@ -26,11 +26,11 @@ task clean(type: Delete) {
 
 subprojects {
     group = 'com.anthonycr.mezzanine'
-    version = '1.0.0'
+    version = '1.0.1'
 }
 
 ext {
-    versionName = '1.0.0'
+    versionName = '1.0.1'
 
     publishGroupId = 'com.anthonycr.mezzanine'
 
