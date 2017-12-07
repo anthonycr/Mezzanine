@@ -1,6 +1,10 @@
 Change Log
 ==========
 
+Version 1.0.2 *(2017-12-06)*
+----------------------------
+- Mezzanine now logs the resolved path of the file to aid in debugging if the file cannot be found.
+
 Version 1.0.1 *(2017-11-04)*
 ----------------------------
 - Mezzanine generated class is now `final` and has a `private` constructor.
