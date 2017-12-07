@@ -10,9 +10,10 @@ import javax.lang.model.element.TypeElement
 object NonExistentFileFilter : (Pair<TypeElement, File>) -> Boolean {
 
     override fun invoke(pair: Pair<TypeElement, File>): Boolean {
-        return pair.second.exists().also {
+        val (element, file) = pair
+        return file.exists().also {
             if (!it) {
-                MessagerUtils.reportError(pair.first, "File does not exist")
+                MessagerUtils.reportError(element, "File does not exist at path: ${file.path}")
             }
         }
     }

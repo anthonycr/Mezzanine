@@ -19,14 +19,16 @@ object GenerateFileStreamTypeSpecFunction : (Pair<TypeElement, String>) -> TypeS
 
         val singleMethod = fileStreamPair.first.enclosedElements[0] as ExecutableElement
 
-        val methodSpec = MethodSpec.methodBuilder(singleMethod.simpleName.toString())
+        val methodSpec = MethodSpec
+                .methodBuilder(singleMethod.simpleName.toString())
                 .addAnnotation(Override::class.java)
                 .addModifiers(Modifier.PUBLIC)
                 .returns(String::class.java)
                 .addCode("return \"$1L\";\n", fileContents)
                 .build()
 
-        return TypeSpec.classBuilder(fileStreamPair.first.simpleName.toString())
+        return TypeSpec
+                .classBuilder(fileStreamPair.first.simpleName.toString())
                 .addModifiers(Modifier.PUBLIC)
                 .addModifiers(Modifier.STATIC)
                 .addSuperinterface(ClassName.get(fileStreamPair.first))

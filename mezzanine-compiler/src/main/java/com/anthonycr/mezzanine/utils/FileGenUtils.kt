@@ -20,16 +20,16 @@ object FileGenUtils {
      */
     @Throws(IOException::class)
     fun writeToDisk(file: JavaFile) {
-        val fileName = if (file.packageName.isEmpty()) file.typeSpec.name else file.packageName + '.' + file.typeSpec.name
+        require(file.packageName.isNotBlank())
+
+        val fileName = "${file.packageName}.${file.typeSpec.name}"
         val originatingElements = file.typeSpec.originatingElements
         val filerSourceFile = filer.createSourceFile(fileName, *originatingElements.toTypedArray())
 
         filerSourceFile.delete()
 
-        val writer = filerSourceFile.openWriter()
-
-        writer.use {
-            file.writeTo(writer)
+        filerSourceFile.openWriter().use {
+            file.writeTo(it)
         }
     }
 }
