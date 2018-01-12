@@ -21,6 +21,12 @@ android {
     }
 }
 
+kapt {
+    arguments {
+        arg("mezzanine.projectPath": project.rootDir.path)
+    }
+}
+
 dependencies {
     implementation 'com.android.support:appcompat-v7:27.0.2'
 

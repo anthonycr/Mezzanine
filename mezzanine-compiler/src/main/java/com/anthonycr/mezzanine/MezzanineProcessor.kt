@@ -19,13 +19,13 @@ import javax.lang.model.element.TypeElement
 @AutoService(Processor::class)
 class MezzanineProcessor : AbstractProcessor() {
 
-    private var isProcessed: Boolean = false
+    private var isProcessed = false
 
-    override fun getSupportedAnnotationTypes() = mutableSetOf("com.anthonycr.mezzanine.FileStream")
+    override fun getSupportedAnnotationTypes() = mutableSetOf(FileStream::class.java.name)
 
     override fun getSupportedSourceVersion(): SourceVersion = SourceVersion.latestSupported()
 
-    override fun getSupportedOptions() = setOf(OPTION_PROJECT_PATH)
+    override fun getSupportedOptions() = mutableSetOf(OPTION_PROJECT_PATH)
 
     override fun init(processingEnvironment: javax.annotation.processing.ProcessingEnvironment) {
         super.init(processingEnvironment)
