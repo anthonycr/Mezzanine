@@ -13,7 +13,7 @@ class ElementToTypeAndFilePairFunctionTest {
     fun test_NonTypeElement_ThrowsException() {
         val executableElement = Mockito.mock(ExecutableElement::class.java)
 
-        ElementToTypeAndFilePairFunction.invoke(executableElement)
+        ElementToTypeAndFilePairFunction("").invoke(executableElement)
     }
 
 }
