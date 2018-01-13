@@ -21,9 +21,10 @@ class ProcessorTester(private val processor: () -> Processor) {
     /**
      * Compiles the [KClass] with the provided [processor].
      */
-    fun compile(vararg kClass: KClass<*>): Compilation =
+    fun compile(vararg kClass: KClass<*>, options: List<String> = listOf()): Compilation =
             Compiler.javac()
                     .withProcessors(processor())
+                    .withOptions(options)
                     .compile(javaFileManager.getJavaFileObjects(
                             *kClass.map { it.asResourcePath().asClasspathFile() }.toTypedArray()
                     ))
