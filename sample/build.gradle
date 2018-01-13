@@ -23,7 +23,7 @@ android {
 
 kapt {
     arguments {
-        arg("mezzanine.projectPath": project.rootDir.path)
+        arg("mezzanine.projectPath", project.rootDir)
     }
 }
 
