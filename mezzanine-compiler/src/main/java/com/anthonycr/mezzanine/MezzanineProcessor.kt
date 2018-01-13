@@ -4,10 +4,12 @@ import com.anthonycr.mezzanine.extensions.doOnNext
 import com.anthonycr.mezzanine.filter.NonExistentFileFilter
 import com.anthonycr.mezzanine.filter.SupportedElementFilter
 import com.anthonycr.mezzanine.function.*
+import com.anthonycr.mezzanine.options.OPTION_PROJECT_PATH
 import com.anthonycr.mezzanine.source.MezzanineElementSource
 import com.anthonycr.mezzanine.utils.FileGenUtils
 import com.anthonycr.mezzanine.utils.MessagerUtils
 import com.google.auto.service.AutoService
+import java.nio.file.Paths
 import javax.annotation.processing.AbstractProcessor
 import javax.annotation.processing.Processor
 import javax.annotation.processing.RoundEnvironment
@@ -17,11 +19,13 @@ import javax.lang.model.element.TypeElement
 @AutoService(Processor::class)
 class MezzanineProcessor : AbstractProcessor() {
 
-    private var isProcessed: Boolean = false
+    private var isProcessed = false
 
-    override fun getSupportedAnnotationTypes() = mutableSetOf("com.anthonycr.mezzanine.FileStream")
+    override fun getSupportedAnnotationTypes() = mutableSetOf(FileStream::class.java.name)
 
     override fun getSupportedSourceVersion(): SourceVersion = SourceVersion.latestSupported()
+
+    override fun getSupportedOptions() = mutableSetOf(OPTION_PROJECT_PATH)
 
     override fun init(processingEnvironment: javax.annotation.processing.ProcessingEnvironment) {
         super.init(processingEnvironment)
@@ -36,14 +40,18 @@ class MezzanineProcessor : AbstractProcessor() {
 
         isProcessed = true
 
+        val projectRoot = processingEnv.options[OPTION_PROJECT_PATH] ?: Paths.get("").toAbsolutePath().toString()
+
         MessagerUtils.reportInfo("Starting Mezzanine processing")
 
         MezzanineElementSource(roundEnvironment)
                 .createElementStream()
                 .filter(SupportedElementFilter)
-                .map(ElementToTypeAndFilePairFunction)
+                .map(ElementToTypeAndFilePairFunction(projectRoot))
                 .filter(NonExistentFileFilter)
-                .doOnNext { typeElementFileEntry -> MessagerUtils.reportInfo("Processing file: ${typeElementFileEntry.second}") }
+                .doOnNext { typeElementFileEntry ->
+                    MessagerUtils.reportInfo("Processing file: ${typeElementFileEntry.second}")
+                }
                 .map(FileToStringContentsFunction)
                 .map(GenerateFileStreamTypeSpecFunction)
                 .toList()
