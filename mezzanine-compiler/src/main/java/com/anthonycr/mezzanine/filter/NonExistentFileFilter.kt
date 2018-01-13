@@ -18,7 +18,7 @@ object NonExistentFileFilter : (Pair<TypeElement, File>) -> Boolean {
                         element,
                         "File does not exist at path: ${file.path}."
                                 + "Note: if the path is not pointing to the root of your project, "
-                                + "you probably need to pass project.rootDir.path to the "
+                                + "you probably need to pass project.rootDir to the "
                                 + "$OPTION_PROJECT_PATH annotation processing option."
                 )
             }
