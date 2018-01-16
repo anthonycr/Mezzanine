@@ -1,7 +1,7 @@
 Change Log
 ==========
 
-Version 1.1.0 *(2018-01-14)*
+Version 1.1.0 *(2018-01-15)*
 ----------------------------
 - Added `mezzanine.projectPath` annotation processing argument (specified in gradle) which is used to determine the project root.
 
