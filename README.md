@@ -24,18 +24,40 @@ allprojects {
 
 ##### Android/Java
 ```groovy
-def mezzanineVersion = '1.0.2'
-compile "com.anthonycr.mezzanine:mezzanine:$mezzanineVersion"
-annotationProcessor "com.anthonycr.mezzanine:mezzanine-compiler:$mezzanineVersion"
+dependencies {
+  def mezzanineVersion = '1.1.0'
+  compile "com.anthonycr.mezzanine:mezzanine:$mezzanineVersion"
+  annotationProcessor "com.anthonycr.mezzanine:mezzanine-compiler:$mezzanineVersion"
+}
+
+android {
+  defaultConfig {
+    javaCompileOptions {
+      annotationProcessorOptions {
+        arguments = [
+          "mezzanine.projectPath", project.rootDir
+        ]
+      }
+    }
+  }
+}
 ```
 
 ##### Kotlin
 ```groovy
 apply plugin: 'kotlin-kapt'
 
-def mezzanineVersion = '1.0.2'
-compile "com.anthonycr.mezzanine:mezzanine:$mezzanineVersion"
-kapt "com.anthonycr.mezzanine:mezzanine-compiler:$mezzanineVersion"
+dependencies {
+  def mezzanineVersion = '1.1.0'
+  compile "com.anthonycr.mezzanine:mezzanine:$mezzanineVersion"
+  kapt "com.anthonycr.mezzanine:mezzanine-compiler:$mezzanineVersion"
+}
+
+kapt {
+    arguments {
+        arg("mezzanine.projectPath", project.rootDir)
+    }
+}
 ```
 
 ##### Java
@@ -45,14 +67,23 @@ plugins {
 }
 
 dependencies {
-    def mezzanineVersion = '1.0.2'
+    def mezzanineVersion = '1.1.0'
     compile "com.anthonycr.mezzanine:mezzanine:$mezzanineVersion"
     apt "com.anthonycr.mezzanine:mezzanine-compiler:$mezzanineVersion"
+}
+
+gradle.projectsEvaluated {
+  tasks.withType(JavaCompile) {
+    aptOptions.processorArgs = [
+      "mezzanine.projectPath", project.rootDir
+    ]
+  }
 }
 ```
 
 ### API
 - `@FileStream(String path)`: the path to the file relative to the project root.
+- `mezzanine.projectPath` annotation processing argument is used to determine the absolute path of the project root. If not provided, mezzanine will use the root accessible to the javac instance.
 - Create an `interface` with one method with no parameters and a return type of `String`.
 - Annotate the interface with `@FileStream` and pass the path to the file as the value in the annotation.
 - Consume the generated implementation of the interface to get the file as a string.
