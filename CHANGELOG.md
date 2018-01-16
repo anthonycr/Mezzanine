@@ -1,6 +1,10 @@
 Change Log
 ==========
 
+Version 1.1.0 *(2018-01-15)*
+----------------------------
+- Added `mezzanine.projectPath` annotation processing argument (specified in gradle) which is used to determine the project root.
+
 Version 1.0.2 *(2017-12-06)*
 ----------------------------
 - Mezzanine now logs the resolved path of the file to aid in debugging if the file cannot be found.

@@ -8,6 +8,7 @@ import org.junit.Test
 import testcase.InvalidFileTestCase
 import testcase.ValidFileExtraSlashTestCase
 import testcase.ValidFileTestCase
+import java.nio.file.Paths
 
 /**
  * Unit tests for [MezzanineProcessor].
@@ -20,6 +21,15 @@ class MezzanineProcessorTest {
     fun `ValidFileTestCase compilation succeeds`() {
         assertThat(processorTester.compile(ValidFileTestCase::class)).isSuccessful()
     }
+
+    @Test
+    fun `ValidFileTestCase with custom argument compilation succeeds`() {
+        assertThat(processorTester.compile(
+                ValidFileTestCase::class,
+                options = listOf("-Amezzanine.projectPath=${Paths.get("").toAbsolutePath()}")
+        ))
+    }
+
 
     @Test
     fun `ValidFileExtraSlashTestCase compilation succeeds`() {
