@@ -26,6 +26,6 @@ object MessagerUtils {
      *
      * @param message the message to log.
      */
-    fun reportInfo(message: String) = messager.printMessage(Kind.NOTE, message)
+    fun reportInfo(message: String) = println("Mezzanine: $message")
 
 }

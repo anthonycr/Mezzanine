@@ -1,5 +1,5 @@
 buildscript {
-    ext.kotlinVersion = '1.2.10'
+    ext.kotlinVersion = '1.2.31'
     ext.dokkaVersion = '0.9.15'
     repositories {
         google()
@@ -7,7 +7,7 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.0.1'
+        classpath 'com.android.tools.build:gradle:3.1.0'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
         classpath "org.jetbrains.dokka:dokka-gradle-plugin:$dokkaVersion"
     }
@@ -26,11 +26,11 @@ task clean(type: Delete) {
 
 subprojects {
     group = 'com.anthonycr.mezzanine'
-    version = '1.1.0'
+    version = '1.1.1'
 }
 
 ext {
-    versionName = '1.1.0'
+    versionName = '1.1.1'
 
     publishGroupId = 'com.anthonycr.mezzanine'
 
