@@ -1,6 +1,10 @@
 Change Log
 ==========
 
+Version 1.1.1 *(2018-04-08)*
+----------------------------
+- Fixed warnings caused by logging on latest versions of the Kotlin compiler by changing logging behavior.
+
 Version 1.1.0 *(2018-01-15)*
 ----------------------------
 - Added `mezzanine.projectPath` annotation processing argument (specified in gradle) which is used to determine the project root.
