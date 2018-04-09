@@ -15,8 +15,8 @@ class MessagerUtilsTest {
         MessagerUtils.reportError(element, "test error")
     }
 
-    @Test(expected = UninitializedPropertyAccessException::class)
-    internal fun `reportInfo fails when uninitialized`() {
+    @Test
+    internal fun `reportInfo does not fail when uninitialized`() {
         MessagerUtils.reportInfo("test message")
     }
 }
