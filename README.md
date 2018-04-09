@@ -25,7 +25,7 @@ allprojects {
 ##### Android/Java
 ```groovy
 dependencies {
-  def mezzanineVersion = '1.1.0'
+  def mezzanineVersion = '1.1.1'
   compile "com.anthonycr.mezzanine:mezzanine:$mezzanineVersion"
   annotationProcessor "com.anthonycr.mezzanine:mezzanine-compiler:$mezzanineVersion"
 }
@@ -48,7 +48,7 @@ android {
 apply plugin: 'kotlin-kapt'
 
 dependencies {
-  def mezzanineVersion = '1.1.0'
+  def mezzanineVersion = '1.1.1'
   compile "com.anthonycr.mezzanine:mezzanine:$mezzanineVersion"
   kapt "com.anthonycr.mezzanine:mezzanine-compiler:$mezzanineVersion"
 }
@@ -67,7 +67,7 @@ plugins {
 }
 
 dependencies {
-    def mezzanineVersion = '1.1.0'
+    def mezzanineVersion = '1.1.1'
     compile "com.anthonycr.mezzanine:mezzanine:$mezzanineVersion"
     apt "com.anthonycr.mezzanine:mezzanine-compiler:$mezzanineVersion"
 }
