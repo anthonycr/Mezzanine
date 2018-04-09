@@ -42,7 +42,7 @@ class MezzanineProcessor : AbstractProcessor() {
 
         val projectRoot = processingEnv.options[OPTION_PROJECT_PATH] ?: Paths.get("").toAbsolutePath().toString()
 
-        MessagerUtils.reportInfo("Starting Mezzanine processing")
+        MessagerUtils.reportInfo("Starting processing")
 
         MezzanineElementSource(roundEnvironment)
                 .createElementStream()
