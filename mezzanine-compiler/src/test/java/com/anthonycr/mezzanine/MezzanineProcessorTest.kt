@@ -15,7 +15,7 @@ import java.nio.file.Paths
  */
 class MezzanineProcessorTest {
 
-    private val processorTester = ProcessorTester({ MezzanineProcessor() })
+    private val processorTester = ProcessorTester { MezzanineProcessor() }
 
     @Test
     fun `ValidFileTestCase compilation succeeds`() {
@@ -40,6 +40,26 @@ class MezzanineProcessorTest {
     fun `InvalidFileTestCase compilation fails`() {
         assertThat(processorTester.compile(InvalidFileTestCase::class)).isUnsuccessful()
     }
+
+    @Test
+    fun `verify deterministic compilation`() {
+        val input = arrayOf(
+                ValidFileTestCase::class,
+                ValidFileExtraSlashTestCase::class
+        )
+
+        val compilationHash1 = processorTester.compile(*input).hashOutput()
+        val compilationHash2 = processorTester.compile(*input).hashOutput()
+
+        assertThat(compilationHash1).isEqualTo(compilationHash2)
+    }
+
+    /**
+     * Return the hashed contents of each file output by the [Compilation] joined to a single
+     * [String].
+     */
+    private fun Compilation.hashOutput() = generatedFiles()
+            .joinToString { it.getCharContent(false).hashCode().toString() }
 
     /**
      * An extension that asserts that a compilation is unsuccessful.
