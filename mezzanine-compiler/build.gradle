@@ -13,19 +13,21 @@ dependencies {
     kapt "com.google.auto.service:auto-service:$autoServiceVersion"
 
     // code generation
-    implementation 'com.squareup:javapoet:1.9.0'
+    implementation 'com.squareup:javapoet:1.11.1'
     implementation 'org.apache.commons:commons-text:1.1'
 
     // kotlin
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jre8:$kotlinVersion"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlinVersion"
 
     implementation project(':mezzanine')
 
     testImplementation 'junit:junit:4.12'
-    testImplementation 'org.assertj:assertj-core:3.9.0'
-    testImplementation 'org.mockito:mockito-core:2.13.0'
-    testImplementation 'com.google.testing.compile:compile-testing:0.13'
+    testImplementation 'org.assertj:assertj-core:3.10.0'
+    testImplementation 'org.mockito:mockito-core:2.21.0'
+    testImplementation 'com.google.testing.compile:compile-testing:0.15'
 
+    // Used by both auto-service and compile-testing, we need to resolve the version for them.
+    implementation 'com.google.guava:guava:23.5-jre'
 }
 
 compileJava {
