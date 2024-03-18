@@ -1,23 +1,36 @@
-apply plugin: 'com.android.application'
-apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'
-apply plugin: 'kotlin-kapt'
+plugins {
+    alias(libs.plugins.androidApplication)
+    kotlin("android")
+    kotlin("kapt")
+}
 
 android {
-    compileSdkVersion 27
-    buildToolsVersion '27.0.3'
+    namespace = "com.anthonycr.mezzanine"
+    compileSdk = 34
+
     defaultConfig {
-        applicationId "com.anthonycr.mezzanine.sample"
-        minSdkVersion 16
-        targetSdkVersion 27
-        versionCode 1
-        versionName "1.0"
+        applicationId = "com.anthonycr.mezzanine"
+        minSdk = 24
+        targetSdk = 34
+        versionCode = 1
+        versionName = "1.0"
     }
+
     buildTypes {
         release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            isMinifyEnabled = false
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
+            )
         }
+    }
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = "1.8"
     }
 }
 
@@ -28,8 +41,10 @@ kapt {
 }
 
 dependencies {
-    implementation 'com.android.support:appcompat-v7:27.0.2'
+    implementation(libs.androidx.core.ktx)
+    implementation(libs.androidx.appcompat)
+    implementation(libs.material)
 
-    implementation project(':mezzanine')
-    kapt project(':mezzanine-compiler')
+    implementation(project(":mezzanine"))
+    kapt(project(":mezzanine-compiler"))
 }
