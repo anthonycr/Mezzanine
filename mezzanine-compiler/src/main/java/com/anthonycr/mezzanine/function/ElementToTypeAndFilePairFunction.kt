@@ -30,7 +30,7 @@ class ElementToTypeAndFilePairFunction(
         val absoluteFilePath = "$projectRoot${prependSlashIfNecessary(filePath)}"
         val file = File(absoluteFilePath)
 
-        return Pair(element as TypeElement, file)
+        return Pair(element, file)
     }
 
 }
