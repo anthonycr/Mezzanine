@@ -1,12 +1,9 @@
 package com.anthonycr.mezzanine
 
-import com.anthonycr.mezzanine.extensions.doOnNext
-import com.anthonycr.mezzanine.filter.SupportedElementFilter
-import com.anthonycr.mezzanine.function.ElementToTypeAndFilePairFunction
-import com.anthonycr.mezzanine.function.GenerateFileStreamTypeSpecFunction
-import com.anthonycr.mezzanine.function.GenerateMezzanineTypeSpecFunction
-import com.anthonycr.mezzanine.function.TypeSpecToJavaFileFunction
-import com.anthonycr.mezzanine.utils.MessagerUtils
+import com.anthonycr.mezzanine.filter.isSupported
+import com.anthonycr.mezzanine.function.asAggregatedMezzanineGeneratorFileSpec
+import com.anthonycr.mezzanine.function.asDeclarationAndFilePath
+import com.anthonycr.mezzanine.function.asFileStreamImplementationTypeSpec
 import com.google.devtools.ksp.processing.CodeGenerator
 import com.google.devtools.ksp.processing.KSPLogger
 import com.google.devtools.ksp.processing.Resolver
@@ -19,26 +16,20 @@ class MezzanineProcessor(
     private val logger: KSPLogger,
 ) : SymbolProcessor {
     override fun process(resolver: Resolver): List<KSAnnotated> {
-        MessagerUtils.messager = logger
-
-        MessagerUtils.reportInfo("Starting processing")
+        logger.info("Starting mezzanine processing")
 
         val symbolsWithAnnotation =
             resolver.getSymbolsWithAnnotation(FileStream::class.qualifiedName!!)
 
         val fileStreamTypeSpecs = symbolsWithAnnotation
-            .filter(SupportedElementFilter)
-            .map(ElementToTypeAndFilePairFunction())
-            .doOnNext { typeElementFileEntry ->
-                MessagerUtils.reportInfo("Processing file: ${typeElementFileEntry.second}")
-            }
-            .map { it.first to it.second }
-            .map(GenerateFileStreamTypeSpecFunction)
+            .filter { it.isSupported(logger) }
+            .map { it.asDeclarationAndFilePath() }
+            .onEach { (_, path) -> logger.info("Processing file: $path") }
+            .map { it.asFileStreamImplementationTypeSpec() }
             .toList()
 
         if (fileStreamTypeSpecs.isNotEmpty()) {
-            fileStreamTypeSpecs.run(GenerateMezzanineTypeSpecFunction)
-                .run(TypeSpecToJavaFileFunction)
+            fileStreamTypeSpecs.asAggregatedMezzanineGeneratorFileSpec()
                 .writeTo(codeGenerator, true)
         }
 
