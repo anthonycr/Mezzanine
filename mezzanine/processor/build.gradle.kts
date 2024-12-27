@@ -21,9 +21,4 @@ dependencies {
     implementation(libs.kotlinpoet.ksp)
 
     testImplementation(libs.junit)
-    testImplementation(libs.assertj.core)
-    testImplementation(libs.mockito.core)
-    testImplementation(libs.compiletesting)
-    // Used by both auto-service and compile-testing, we need to resolve the version for them.
-    testImplementation(libs.guava)
 }
