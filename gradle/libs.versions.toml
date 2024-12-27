@@ -19,7 +19,7 @@ kotlinpoet-ksp = { group = "com.squareup", name = "kotlinpoet-ksp", version.ref 
 # Testing
 assertj-core = { group = "org.assertj", name = "assertj-core", version = "3.24.2" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
-mockito-core = { group = "org.mockito", name = "mockito-core", version = "3.11.2" }
+mockito-core = { group = "org.mockito", name = "mockito-core", version = "3.12.4" }
 compiletesting = { group = "com.google.testing.compile", name = "compile-testing", version = "0.15" }
 guava = { group = "com.google.guava", name = "guava", version = "23.5-jre" }
 androidx-activity-compose = { group = "androidx.activity", name = "activity-compose", version.ref = "activityCompose" }
