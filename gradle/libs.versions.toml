@@ -11,7 +11,7 @@ androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = 
 androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
 autoservice = { group = "com.google.auto.service", name = "auto-service", version = "1.0-rc3" }
-javapoet = { group = "com.squareup", name = "javapoet", version = "1.11.1" }
+javapoet = { group = "com.squareup", name = "javapoet", version = "1.13.0" }
 commons-text = { group = "org.apache.commons", name = "commons-text", version = "1.1" }
 kotlin = { group = "org.jetbrains.kotlin", name = "kotlin-stdlib-jdk8", version.ref = "kotlin" }
 
