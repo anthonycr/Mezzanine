@@ -22,7 +22,6 @@ dependencies {
     implementation(gradleApi())
     implementation(libs.kotlin)
     implementation(libs.kotlin.gradle)
-    implementation(libs.ksp.api)
     implementation(libs.kotlinpoet)
 }
 
