@@ -12,7 +12,6 @@ kotlin {
 }
 
 dependencies {
-    implementation(libs.commons.text)
     implementation(libs.kotlin)
     implementation(project(":mezzanine:core"))
 
