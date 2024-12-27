@@ -1,7 +1,10 @@
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+import org.jetbrains.kotlin.gradle.dsl.KotlinVersion
+
 plugins {
-    alias(libs.plugins.android.app)
     id("com.anthonycr.mezzanine.plugin")
-    kotlin("android")
+    alias(libs.plugins.android.app)
+    alias(libs.plugins.kotlin.android)
     alias(libs.plugins.ksp.plugin)
 }
 
@@ -20,19 +23,21 @@ android {
     buildTypes {
         release {
             isMinifyEnabled = false
-            proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
-            )
         }
     }
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+}
+
+kotlin {
+    jvmToolchain(libs.versions.jvm.get().toInt())
+    compilerOptions {
+        jvmTarget.set(JvmTarget.JVM_17)
+        languageVersion.set(KotlinVersion.KOTLIN_2_0)
     }
-    kotlinOptions {
-        jvmTarget = "1.8"
-    }
+}
+
+java {
+    targetCompatibility = JavaVersion.VERSION_17
+    sourceCompatibility = JavaVersion.VERSION_17
 }
 
 mezzanine {

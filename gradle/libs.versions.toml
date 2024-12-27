@@ -7,6 +7,7 @@ appcompat = "1.7.0"
 material = "1.11.0"
 ksp = "2.1.0-1.0.29"
 kotlinpoet = "2.0.0"
+jvm = "17"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
