@@ -29,8 +29,9 @@ class MezzanineProcessor(
             .toList()
 
         if (fileStreamTypeSpecs.isNotEmpty()) {
-            fileStreamTypeSpecs.asAggregatedMezzanineGeneratorFileSpec()
-                .writeTo(codeGenerator, true)
+            fileStreamTypeSpecs.asAggregatedMezzanineGeneratorFileSpec().forEach {
+                it.writeTo(codeGenerator, true)
+            }
         }
 
         return emptyList()

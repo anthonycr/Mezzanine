@@ -13,7 +13,8 @@ import com.squareup.kotlinpoet.ksp.toClassName
  * Generates the [TypeSpec] for the interface represented by the [KSClassDeclaration] which returns
  * the [String].
  */
-fun Pair<KSClassDeclaration, String>.asFileStreamImplementationTypeSpec(): TypeSpec {
+fun Pair<KSClassDeclaration, String>.asFileStreamImplementationTypeSpec(
+): Pair<KSClassDeclaration, TypeSpec> {
     val (interfaceDeclaration, path) = this
 
     val singleMethod = interfaceDeclaration.getDeclaredFunctions().first()
@@ -29,9 +30,11 @@ fun Pair<KSClassDeclaration, String>.asFileStreamImplementationTypeSpec(): TypeS
         )
         .build()
 
-    return TypeSpec
-        .classBuilder(interfaceDeclaration.simpleName.asString())
+    return interfaceDeclaration to TypeSpec
+        .classBuilder(PREFIX + interfaceDeclaration.simpleName.asString())
         .addSuperinterface(interfaceDeclaration.toClassName())
         .addFunction(funSpec)
         .build()
 }
+
+private const val PREFIX = "_Mezzanine_"

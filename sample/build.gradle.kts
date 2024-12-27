@@ -35,12 +35,6 @@ android {
     }
 }
 
-kotlin {
-    sourceSets.main {
-        kotlin.srcDirs("src/main/myJava", "src/main/myKotlin")
-    }
-}
-
 mezzanine {
     files = files(
         "src/main/assets/test.json"

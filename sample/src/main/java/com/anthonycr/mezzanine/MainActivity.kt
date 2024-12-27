@@ -10,7 +10,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val fileReader = MezzanineGenerator.FileReader()
+        val fileReader = mezzanine(FileReader::class.java)
 
         val file = fileReader.readInTestJsonFile()
 

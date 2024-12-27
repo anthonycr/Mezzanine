@@ -35,7 +35,7 @@ abstract class GenerateMezzanineTask : DefaultTask() {
         val projectPath = relativePath.get()
         val text =
             inputFiles.map { it.invariantSeparatorsPath.substring(projectPath.length + 1) to it.readText() }
-        val file = FileSpec.builder("com.anthonycr.mezzanine", "Mezzanine")
+        val file = FileSpec.builder("com.anthonycr.mezzanine", "MezzanineReader")
             .addFunction(
                 FunSpec.builder("readFromMezzanine")
                     .returns(String::class.asTypeName())
