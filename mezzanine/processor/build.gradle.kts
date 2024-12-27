@@ -12,12 +12,12 @@ kotlin {
 }
 
 dependencies {
-    implementation(libs.kotlin)
     implementation(project(":mezzanine:core"))
 
-    implementation(libs.ksp.api)
+    implementation(libs.kotlin)
     implementation(libs.kotlinpoet)
     implementation(libs.kotlinpoet.ksp)
+    implementation(libs.ksp.api)
 
     testImplementation(libs.junit)
 }
