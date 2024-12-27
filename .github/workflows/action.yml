@@ -13,13 +13,12 @@ jobs:
     steps:
       - name: Checkout sources
         uses: actions/checkout@v4
-      - name: Validate Gradle Wrapper
-        uses: gradle/wrapper-validation-action@v2
-      - name: Configure JDK
+      - name: Setup Java
         uses: actions/setup-java@v4
         with:
           distribution: 'temurin'
-          java-version: '17'
-          cache: 'gradle'
+          java-version: 17
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v4
       - name: Build
         run: ./gradlew build
