@@ -1,4 +1,4 @@
-package com.anthonycr.mezzanine.plugin
+package com.anthonycr.mezzanine.plugin.task
 
 import com.squareup.kotlinpoet.CodeBlock
 import com.squareup.kotlinpoet.FileSpec

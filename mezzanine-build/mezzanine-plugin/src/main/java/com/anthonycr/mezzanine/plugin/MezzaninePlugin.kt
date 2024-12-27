@@ -1,5 +1,6 @@
 package com.anthonycr.mezzanine.plugin
 
+import com.anthonycr.mezzanine.plugin.task.GenerateMezzanineTask
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.jetbrains.kotlin.gradle.dsl.KotlinBaseExtension
