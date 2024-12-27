@@ -1,39 +1,45 @@
 package com.anthonycr.mezzanine.function
 
-import com.squareup.javapoet.ClassName
-import com.squareup.javapoet.MethodSpec
-import com.squareup.javapoet.TypeSpec
-import org.apache.commons.lang3.StringEscapeUtils
-import javax.lang.model.element.ExecutableElement
-import javax.lang.model.element.Modifier
+import com.anthonycr.mezzanine.utils.MessagerUtils
+import com.google.devtools.ksp.getDeclaredFunctions
+import com.google.devtools.ksp.symbol.KSClassDeclaration
+import com.squareup.kotlinpoet.CodeBlock
+import com.squareup.kotlinpoet.FunSpec
+import com.squareup.kotlinpoet.KModifier
+import com.squareup.kotlinpoet.TypeSpec
+import com.squareup.kotlinpoet.asTypeName
+import com.squareup.kotlinpoet.ksp.toClassName
 import javax.lang.model.element.TypeElement
 
 /**
  * A mapping function that generates the [TypeSpec] for the interface represented by the
  * [TypeElement] which returns the [String].
  */
-object GenerateFileStreamTypeSpecFunction : (Pair<TypeElement, String>) -> TypeSpec {
+object GenerateFileStreamTypeSpecFunction : (Pair<KSClassDeclaration, String>) -> TypeSpec {
 
-    override fun invoke(fileStreamPair: Pair<TypeElement, String>): TypeSpec {
-        val fileContents = StringEscapeUtils.escapeJava(fileStreamPair.second)
+    override fun invoke(p1: Pair<KSClassDeclaration, String>): TypeSpec {
+        val path = p1.second
 
-        val singleMethod = fileStreamPair.first.enclosedElements[0] as ExecutableElement
+        val singleMethod = p1.first.getDeclaredFunctions().first()
 
-        val methodSpec = MethodSpec
-                .methodBuilder(singleMethod.simpleName.toString())
-                .addAnnotation(Override::class.java)
-                .addModifiers(Modifier.PUBLIC)
-                .returns(String::class.java)
-                .addCode("return \"$1L\";\n", fileContents)
-                .build()
+        MessagerUtils.reportInfo(singleMethod.simpleName.asString())
+
+        val funSpec = FunSpec.builder(singleMethod.simpleName.asString())
+            .addModifiers(KModifier.OVERRIDE)
+            .returns(String::class.asTypeName())
+            .addCode(
+                CodeBlock.builder()
+                    .addStatement(
+                        "return com.anthonycr.mezzanine.readFromMezzanine(%S)", path
+                    ).build()
+            )
+            .build()
 
         return TypeSpec
-                .classBuilder(fileStreamPair.first.simpleName.toString())
-                .addModifiers(Modifier.PUBLIC)
-                .addModifiers(Modifier.STATIC)
-                .addSuperinterface(ClassName.get(fileStreamPair.first))
-                .addMethod(methodSpec)
-                .build()
+            .classBuilder(p1.first.simpleName.asString())
+            .addSuperinterface(p1.first.toClassName())
+            .addFunction(funSpec)
+            .build()
     }
 
 }

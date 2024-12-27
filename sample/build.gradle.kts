@@ -1,7 +1,8 @@
 plugins {
     alias(libs.plugins.android.app)
+    id("com.anthonycr.mezzanine.plugin")
     kotlin("android")
-    kotlin("kapt")
+    alias(libs.plugins.ksp.plugin)
 }
 
 android {
@@ -34,10 +35,16 @@ android {
     }
 }
 
-kapt {
-    arguments {
-        arg("mezzanine.projectPath", project.rootDir)
+kotlin {
+    sourceSets.main {
+        kotlin.srcDirs("src/main/myJava", "src/main/myKotlin")
     }
+}
+
+mezzanine {
+    files = files(
+        "src/main/assets/test.json"
+    )
 }
 
 dependencies {
@@ -46,5 +53,5 @@ dependencies {
     implementation(libs.material)
 
     implementation(project(":mezzanine"))
-    kapt(project(":mezzanine-compiler"))
+    ksp(project(":mezzanine-compiler"))
 }

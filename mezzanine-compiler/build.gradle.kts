@@ -1,6 +1,5 @@
 plugins {
     kotlin("jvm")
-    kotlin("kapt")
 }
 
 java {
@@ -9,13 +8,14 @@ java {
 }
 
 dependencies {
-    implementation(libs.autoservice)
-    kapt(libs.autoservice)
-    implementation(libs.javapoet)
     implementation(libs.commons.text)
     implementation(libs.kotlin)
 
     implementation(project(":mezzanine"))
+
+    implementation(libs.ksp.api)
+    implementation(libs.kotlinpoet)
+    implementation(libs.kotlinpoet.ksp)
 
     testImplementation(libs.junit)
     testImplementation(libs.assertj.core)

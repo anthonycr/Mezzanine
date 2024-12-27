@@ -1,6 +1,10 @@
 package com.anthonycr.mezzanine.function
 
 import com.anthonycr.mezzanine.FileStream
+import com.google.devtools.ksp.symbol.KSAnnotated
+import com.google.devtools.ksp.symbol.KSClassDeclaration
+import com.squareup.kotlinpoet.asTypeName
+import com.squareup.kotlinpoet.ksp.toTypeName
 import java.io.File
 import javax.lang.model.element.Element
 import javax.lang.model.element.TypeElement
@@ -14,23 +18,17 @@ private fun prependSlashIfNecessary(path: String): String =
 /**
  * A mapping function that takes a stream of supported elements (methods) and maps them to their
  * enclosing interfaces and the files represented by the method annotations.
- *
- * @param projectRoot the absolute path to the root of the project.
  */
-class ElementToTypeAndFilePairFunction(
-        private val projectRoot: String
-) : (Element) -> Pair<TypeElement, File> {
+class ElementToTypeAndFilePairFunction() : (KSAnnotated) -> Pair<KSClassDeclaration, String> {
 
-    override fun invoke(element: Element): Pair<TypeElement, File> {
+    override fun invoke(p1: KSAnnotated): Pair<KSClassDeclaration, String> {
 
-        require(element is TypeElement)
+        require(p1 is KSClassDeclaration)
 
-        val filePath = element.getAnnotation(FileStream::class.java).value
+        val filePath = p1.annotations.first { it.annotationType.toTypeName() == FileStream::class.asTypeName() }
+            .arguments.first().value
 
-        val absoluteFilePath = "$projectRoot${prependSlashIfNecessary(filePath)}"
-        val file = File(absoluteFilePath)
-
-        return Pair(element, file)
+        return Pair(p1, filePath as String)
     }
 
 }

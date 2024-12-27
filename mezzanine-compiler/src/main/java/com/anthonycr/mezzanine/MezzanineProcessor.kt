@@ -1,65 +1,47 @@
 package com.anthonycr.mezzanine
 
 import com.anthonycr.mezzanine.extensions.doOnNext
-import com.anthonycr.mezzanine.filter.NonExistentFileFilter
 import com.anthonycr.mezzanine.filter.SupportedElementFilter
-import com.anthonycr.mezzanine.function.*
-import com.anthonycr.mezzanine.options.OPTION_PROJECT_PATH
-import com.anthonycr.mezzanine.source.MezzanineElementSource
-import com.anthonycr.mezzanine.utils.FileGenUtils
+import com.anthonycr.mezzanine.function.ElementToTypeAndFilePairFunction
+import com.anthonycr.mezzanine.function.GenerateFileStreamTypeSpecFunction
+import com.anthonycr.mezzanine.function.GenerateMezzanineTypeSpecFunction
+import com.anthonycr.mezzanine.function.TypeSpecToJavaFileFunction
 import com.anthonycr.mezzanine.utils.MessagerUtils
-import com.google.auto.service.AutoService
-import java.nio.file.Paths
-import javax.annotation.processing.AbstractProcessor
-import javax.annotation.processing.Processor
-import javax.annotation.processing.RoundEnvironment
-import javax.lang.model.SourceVersion
-import javax.lang.model.element.TypeElement
+import com.google.devtools.ksp.processing.CodeGenerator
+import com.google.devtools.ksp.processing.KSPLogger
+import com.google.devtools.ksp.processing.Resolver
+import com.google.devtools.ksp.processing.SymbolProcessor
+import com.google.devtools.ksp.symbol.KSAnnotated
+import com.squareup.kotlinpoet.ksp.writeTo
 
-@AutoService(Processor::class)
-class MezzanineProcessor : AbstractProcessor() {
-
-    private var isProcessed = false
-
-    override fun getSupportedAnnotationTypes() = mutableSetOf(FileStream::class.java.name)
-
-    override fun getSupportedSourceVersion(): SourceVersion = SourceVersion.latestSupported()
-
-    override fun getSupportedOptions() = mutableSetOf(OPTION_PROJECT_PATH)
-
-    override fun init(processingEnvironment: javax.annotation.processing.ProcessingEnvironment) {
-        super.init(processingEnvironment)
-        MessagerUtils.messager = processingEnvironment.messager
-        FileGenUtils.filer = processingEnvironment.filer
-    }
-
-    override fun process(set: Set<TypeElement>, roundEnvironment: RoundEnvironment): Boolean {
-        if (isProcessed) {
-            return true
-        }
-
-        isProcessed = true
-
-        val projectRoot = processingEnv.options[OPTION_PROJECT_PATH] ?: Paths.get("").toAbsolutePath().toString()
+class MezzanineProcessor(
+    private val codeGenerator: CodeGenerator,
+    private val logger: KSPLogger,
+) : SymbolProcessor {
+    override fun process(resolver: Resolver): List<KSAnnotated> {
+        MessagerUtils.messager = logger
 
         MessagerUtils.reportInfo("Starting processing")
 
-        MezzanineElementSource(roundEnvironment)
-                .createElementStream()
-                .filter(SupportedElementFilter)
-                .map(ElementToTypeAndFilePairFunction(projectRoot))
-                .filter(NonExistentFileFilter)
-                .doOnNext { typeElementFileEntry ->
-                    MessagerUtils.reportInfo("Processing file: ${typeElementFileEntry.second}")
-                }
-                .map(FileToStringContentsFunction)
-                .map(GenerateFileStreamTypeSpecFunction)
-                .toList()
-                .run(GenerateMezzanineTypeSpecFunction)
-                .run(TypeSpecToJavaFileFunction)
-                .run { FileGenUtils.writeToDisk(this) }
-                .run { MessagerUtils.reportInfo("File successfully processed") }
+        val symbolsWithAnnotation =
+            resolver.getSymbolsWithAnnotation(FileStream::class.qualifiedName!!)
 
-        return true
+        val fileStreamTypeSpecs = symbolsWithAnnotation
+            .filter(SupportedElementFilter)
+            .map(ElementToTypeAndFilePairFunction())
+            .doOnNext { typeElementFileEntry ->
+                MessagerUtils.reportInfo("Processing file: ${typeElementFileEntry.second}")
+            }
+            .map { it.first to it.second }
+            .map(GenerateFileStreamTypeSpecFunction)
+            .toList()
+
+        if (fileStreamTypeSpecs.isNotEmpty()) {
+            fileStreamTypeSpecs.run(GenerateMezzanineTypeSpecFunction)
+                .run(TypeSpecToJavaFileFunction)
+                .writeTo(codeGenerator, true)
+        }
+
+        return emptyList()
     }
 }

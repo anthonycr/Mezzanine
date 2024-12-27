@@ -6,7 +6,6 @@ junit = "4.13.2"
 appcompat = "1.7.0"
 material = "1.11.0"
 ksp = "2.1.0-1.0.29"
-kotlinpoet = "2.0.0"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -18,8 +17,7 @@ commons-text = { group = "org.apache.commons", name = "commons-text", version = 
 kotlin = { group = "org.jetbrains.kotlin", name = "kotlin-stdlib-jdk8", version.ref = "kotlin" }
 kotlin-gradle = { group = "org.jetbrains.kotlin", name = "kotlin-gradle-plugin-api", version.ref = "kotlin" }
 ksp-api = { group = "com.google.devtools.ksp", name = "symbol-processing-api", version.ref = "ksp" }
-kotlinpoet = { group = "com.squareup", name = "kotlinpoet", version.ref = "kotlinpoet" }
-kotlinpoet-ksp = { group = "com.squareup", name = "kotlinpoet-ksp", version.ref = "kotlinpoet" }
+kotlinpoet = { group = "com.squareup", name = "kotlinpoet", version = "2.0.0" }
 
 # Testing
 assertj-core = { group = "org.assertj", name = "assertj-core", version = "3.24.2" }
@@ -32,5 +30,4 @@ guava = { group = "com.google.guava", name = "guava", version = "23.5-jre" }
 android-app = { id = "com.android.application", version.ref = "agp" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
-ksp-plugin = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 

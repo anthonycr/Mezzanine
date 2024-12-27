@@ -19,8 +19,5 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "Mezzanine"
-include(":sample")
-include(":mezzanine")
-include(":mezzanine-compiler")
-includeBuild("mezzanine-build")
+rootProject.name = "com.anthonycr.mezzanine.plugin"
+include(":mezzanine-plugin")
