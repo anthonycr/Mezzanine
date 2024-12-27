@@ -52,6 +52,5 @@ dependencies {
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
     implementation(project(":core"))
-
-    ksp(project(":mezzanine-compiler"))
+    "ksp"(project(":processor"))
 }
