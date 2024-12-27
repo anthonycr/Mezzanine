@@ -1,7 +1,12 @@
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+import org.jetbrains.kotlin.gradle.dsl.KotlinVersion
+
 plugins {
+    id("com.anthonycr.mezzanine.plugin")
     alias(libs.plugins.android.app)
-    kotlin("android")
-    kotlin("kapt")
+    alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.ksp.plugin)
+    alias(libs.plugins.compose.compiler)
 }
 
 android {
@@ -19,32 +24,39 @@ android {
     buildTypes {
         release {
             isMinifyEnabled = false
-            proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
-            )
         }
     }
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
-    }
-    kotlinOptions {
-        jvmTarget = "1.8"
+    buildFeatures {
+        compose = true
     }
 }
 
-kapt {
-    arguments {
-        arg("mezzanine.projectPath", project.rootDir)
+kotlin {
+    jvmToolchain(libs.versions.jvm.get().toInt())
+    compilerOptions {
+        jvmTarget.set(JvmTarget.JVM_17)
     }
+}
+
+java {
+    targetCompatibility = JavaVersion.VERSION_17
+    sourceCompatibility = JavaVersion.VERSION_17
+}
+
+mezzanine {
+    files = files(
+        "src/main/assets/test.json"
+    )
 }
 
 dependencies {
-    implementation(libs.androidx.core.ktx)
-    implementation(libs.androidx.appcompat)
-    implementation(libs.material)
+    ksp(project(":mezzanine:processor"))
+    implementation(project(":mezzanine:core"))
 
-    implementation(project(":mezzanine"))
-    kapt(project(":mezzanine-compiler"))
+    implementation(platform(libs.androidx.compose.bom))
+    implementation(libs.androidx.activity.compose)
+    implementation(libs.androidx.ui.tooling.preview)
+    implementation(libs.androidx.material3)
+    debugImplementation(libs.androidx.ui.tooling)
+    debugImplementation(libs.androidx.ui.test.manifest)
 }

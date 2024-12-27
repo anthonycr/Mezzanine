@@ -17,11 +17,12 @@ dependencyResolutionManagement {
         google()
         mavenCentral()
     }
+    versionCatalogs {
+        create("libs") {
+            from(files("../gradle/libs.versions.toml"))
+        }
+    }
 }
 
-rootProject.name = "Mezzanine"
-include(":sample")
-include(":mezzanine:core")
-include(":mezzanine:internal")
-include(":mezzanine:processor")
-includeBuild("mezzanine-plugin")
+rootProject.name = "mezzanine-plugin"
+include(":plugin")
