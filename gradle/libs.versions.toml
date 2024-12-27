@@ -17,7 +17,7 @@ kotlinpoet = { group = "com.squareup", name = "kotlinpoet", version.ref = "kotli
 kotlinpoet-ksp = { group = "com.squareup", name = "kotlinpoet-ksp", version.ref = "kotlinpoet" }
 
 # Testing
-assertj-core = { group = "org.assertj", name = "assertj-core", version = "3.24.2" }
+assertj-core = { group = "org.assertj", name = "assertj-core", version = "3.27.0" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 mockito-core = { group = "org.mockito", name = "mockito-core", version = "3.11.2" }
 compiletesting = { group = "com.google.testing.compile", name = "compile-testing", version = "0.15" }
