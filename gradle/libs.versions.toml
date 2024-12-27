@@ -6,7 +6,7 @@ ksp = "2.1.0-1.0.29"
 kotlinpoet = "2.0.0"
 jvm = "17"
 activityCompose = "1.8.0"
-composeBom = "2024.04.01"
+composeBom = "2024.12.01"
 
 [libraries]
 commons-text = { group = "org.apache.commons", name = "commons-text", version = "1.1" }
