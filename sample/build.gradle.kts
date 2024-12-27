@@ -6,6 +6,7 @@ plugins {
     alias(libs.plugins.android.app)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.ksp.plugin)
+    alias(libs.plugins.compose.compiler)
 }
 
 android {
@@ -24,6 +25,9 @@ android {
         release {
             isMinifyEnabled = false
         }
+    }
+    buildFeatures {
+        compose = true
     }
 }
 
@@ -47,9 +51,13 @@ mezzanine {
 }
 
 dependencies {
-    implementation(libs.androidx.core.ktx)
-    implementation(libs.androidx.appcompat)
-    implementation(libs.material)
-    implementation(project(":mezzanine:core"))
     ksp(project(":mezzanine:processor"))
+    implementation(project(":mezzanine:core"))
+
+    implementation(platform(libs.androidx.compose.bom))
+    implementation(libs.androidx.activity.compose)
+    implementation(libs.androidx.ui.tooling.preview)
+    implementation(libs.androidx.material3)
+    debugImplementation(libs.androidx.ui.tooling)
+    debugImplementation(libs.androidx.ui.test.manifest)
 }
