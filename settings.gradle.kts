@@ -21,6 +21,6 @@ dependencyResolutionManagement {
 
 rootProject.name = "Mezzanine"
 include(":sample")
-include(":core")
-include(":processor")
+include(":mezzanine:core")
+include(":mezzanine:processor")
 includeBuild("mezzanine-build")

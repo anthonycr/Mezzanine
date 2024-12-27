@@ -10,7 +10,7 @@ java {
 dependencies {
     implementation(libs.commons.text)
     implementation(libs.kotlin)
-    implementation(project(":core"))
+    implementation(project(":mezzanine:core"))
 
     implementation(libs.ksp.api)
     implementation(libs.kotlinpoet)
