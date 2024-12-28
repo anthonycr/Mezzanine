@@ -22,6 +22,7 @@ java {
 
 dependencies {
     implementation(gradleApi())
+    implementation(libs.commons.text)
     implementation(libs.kotlin)
     implementation(libs.kotlin.gradle)
     implementation(libs.kotlinpoet)
