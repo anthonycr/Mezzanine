@@ -11,6 +11,7 @@ kotlin {
     jvmToolchain(libs.versions.jvm.get().toInt())
     compilerOptions {
         jvmTarget.set(JvmTarget.JVM_17)
+        languageVersion.set(KotlinVersion.KOTLIN_2_1)
     }
 }
 
