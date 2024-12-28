@@ -1,8 +1,10 @@
+import com.vanniktech.maven.publish.SonatypeHost
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.dsl.KotlinVersion
 
 plugins {
     alias(libs.plugins.kotlin.jvm)
+    alias(libs.plugins.maven.publish)
 }
 
 kotlin {
@@ -20,4 +22,10 @@ java {
 
 dependencies {
     compileOnly(project(":mezzanine:internal"))
+}
+
+mavenPublishing {
+//    signAllPublications()
+    publishToMavenCentral(SonatypeHost.CENTRAL_PORTAL, automaticRelease = true)
+    coordinates(artifactId = "core")
 }
