@@ -26,6 +26,7 @@ dependencies {
     implementation(libs.kotlin)
     implementation(libs.kotlin.gradle)
     implementation(libs.kotlinpoet)
+    implementation(libs.ksp.processor)
 }
 
 gradlePlugin {

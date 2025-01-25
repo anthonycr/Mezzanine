@@ -21,6 +21,7 @@ kotlin-gradle = { group = "org.jetbrains.kotlin", name = "kotlin-gradle-plugin-a
 kotlinpoet = { group = "com.squareup", name = "kotlinpoet", version.ref = "kotlinpoet" }
 kotlinpoet-ksp = { group = "com.squareup", name = "kotlinpoet-ksp", version.ref = "kotlinpoet" }
 ksp-api = { group = "com.google.devtools.ksp", name = "symbol-processing-api", version.ref = "ksp" }
+ksp-processor = { group = "com.google.devtools.ksp", name = "symbol-processing-gradle-plugin", version.ref = "ksp" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 
 [plugins]
