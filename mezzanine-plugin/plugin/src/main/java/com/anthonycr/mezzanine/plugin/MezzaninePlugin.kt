@@ -1,6 +1,7 @@
 package com.anthonycr.mezzanine.plugin
 
 import com.anthonycr.mezzanine.plugin.task.GenerateMezzanineTask
+import com.google.devtools.ksp.gradle.KspAATask
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.jetbrains.kotlin.gradle.dsl.KotlinBaseExtension
@@ -22,6 +23,10 @@ class MezzaninePlugin : Plugin<Project> {
         target.tasks.withType(KotlinCompileTool::class.java) {
             it.dependsOn(generateMezzanine)
 //            it.outputs.dir(mezzanineDirectory)
+        }
+
+        target.tasks.withType(KspAATask::class.java) {
+            it.dependsOn(generateMezzanine)
         }
 
         target.plugins.withType(KotlinBasePlugin::class.java) {

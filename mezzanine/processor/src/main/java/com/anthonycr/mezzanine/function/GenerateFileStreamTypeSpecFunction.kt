@@ -7,6 +7,7 @@ import com.squareup.kotlinpoet.FunSpec
 import com.squareup.kotlinpoet.KModifier
 import com.squareup.kotlinpoet.TypeSpec
 import com.squareup.kotlinpoet.asTypeName
+import com.squareup.kotlinpoet.ksp.addOriginatingKSFile
 import com.squareup.kotlinpoet.ksp.toClassName
 
 /**
@@ -33,6 +34,7 @@ fun Pair<KSClassDeclaration, String>.asFileStreamImplementationTypeSpec(
     return interfaceDeclaration to TypeSpec
         .classBuilder(PREFIX + interfaceDeclaration.simpleName.asString())
         .addSuperinterface(interfaceDeclaration.toClassName())
+        .addOriginatingKSFile(interfaceDeclaration.containingFile!!)
         .addFunction(funSpec)
         .build()
 }

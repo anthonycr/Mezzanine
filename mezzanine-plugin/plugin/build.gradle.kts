@@ -3,6 +3,7 @@ import org.jetbrains.kotlin.gradle.dsl.KotlinVersion
 
 plugins {
     id("java-gradle-plugin")
+    alias(libs.plugins.gradle.publish)
     alias(libs.plugins.kotlin.jvm)
 }
 
@@ -10,6 +11,7 @@ kotlin {
     jvmToolchain(libs.versions.jvm.get().toInt())
     compilerOptions {
         jvmTarget.set(JvmTarget.JVM_17)
+        languageVersion.set(KotlinVersion.KOTLIN_2_1)
     }
 }
 
@@ -20,9 +22,11 @@ java {
 
 dependencies {
     implementation(gradleApi())
+    implementation(libs.commons.text)
     implementation(libs.kotlin)
     implementation(libs.kotlin.gradle)
     implementation(libs.kotlinpoet)
+    implementation(libs.ksp.processor)
 }
 
 gradlePlugin {
