@@ -7,6 +7,7 @@ import com.squareup.kotlinpoet.FunSpec
 import com.squareup.kotlinpoet.ParameterizedTypeName.Companion.parameterizedBy
 import com.squareup.kotlinpoet.TypeSpec
 import com.squareup.kotlinpoet.TypeVariableName
+import com.squareup.kotlinpoet.ksp.addOriginatingKSFile
 
 /**
  * Generates the Mezzanine [TypeSpec] from a list of [TypeSpec].
@@ -24,6 +25,7 @@ fun List<Pair<KSClassDeclaration, TypeSpec>>.asAggregatedMezzanineGeneratorFileS
                 .beginControlFlow("return when(clazz.canonicalName)")
                 .apply {
                     forEach { (interfaceDeclaration, implementationTypeSpec) ->
+                        addOriginatingKSFile(interfaceDeclaration.containingFile!!)
 
                         val className = "$PACKAGE_NAME.${implementationTypeSpec.name!!}"
                         addStatement("\"${interfaceDeclaration.qualifiedName!!.asString()}\" -> clazz.cast(${className}())!!")
