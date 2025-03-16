@@ -1,6 +1,11 @@
 Change Log
 ==========
 
+Version 2.0.0 *(2025-03-16)*
+----------------------------
+- New Gradle plugin and Kotlin symbol processing architecture replaces old Java annotation processing design.
+- Gradle plugin and Kotlin symbol processor versions are tied together.
+
 Version 1.1.1 *(2018-04-08)*
 ----------------------------
 - Fixed warnings caused by logging on latest versions of the Kotlin compiler by changing logging behavior.
