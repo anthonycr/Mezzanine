@@ -33,14 +33,6 @@ android {
 
 kotlin {
     jvmToolchain(libs.versions.jvm.get().toInt())
-    compilerOptions {
-        jvmTarget.set(JvmTarget.JVM_17)
-    }
-}
-
-java {
-    targetCompatibility = JavaVersion.VERSION_17
-    sourceCompatibility = JavaVersion.VERSION_17
 }
 
 mezzanine {

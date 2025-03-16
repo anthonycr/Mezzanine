@@ -5,6 +5,7 @@ import com.squareup.kotlinpoet.FileSpec
 import com.squareup.kotlinpoet.FunSpec
 import com.squareup.kotlinpoet.ParameterSpec
 import com.squareup.kotlinpoet.asTypeName
+import org.apache.commons.text.StringEscapeUtils
 import org.gradle.api.DefaultTask
 import org.gradle.api.file.ConfigurableFileCollection
 import org.gradle.api.file.DirectoryProperty
@@ -49,8 +50,10 @@ abstract class GenerateMezzanineTask : DefaultTask() {
                             .beginControlFlow("return when(path)")
                             .apply {
                                 text.forEach { (path, text) ->
+                                    val escapedText = StringEscapeUtils.escapeJava(text).replace("$", "\\$")
+                                    logger.warn(escapedText)
                                     beginControlFlow("%S ->", path)
-                                        .addStatement("\"\"\"\n$text\n\"\"\".trimIndent()")
+                                        .addStatement("\"%L\"", escapedText)
                                         .endControlFlow()
                                 }
                             }
