@@ -22,7 +22,6 @@ class MezzaninePlugin : Plugin<Project> {
 
         target.tasks.withType(KotlinCompileTool::class.java) {
             it.dependsOn(generateMezzanine)
-//            it.outputs.dir(mezzanineDirectory)
         }
 
         target.tasks.withType(KspAATask::class.java) {
