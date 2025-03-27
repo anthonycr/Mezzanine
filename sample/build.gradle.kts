@@ -42,9 +42,6 @@ mezzanine {
 }
 
 dependencies {
-    ksp(project(":mezzanine:processor"))
-    implementation(project(":mezzanine:core"))
-
     implementation(platform(libs.androidx.compose.bom))
     implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.ui.tooling.preview)
