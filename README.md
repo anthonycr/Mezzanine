@@ -16,7 +16,7 @@ To your application's `build.gradle.kts`, you must apply the Kotlin plugin, the 
 plugins {
     kotlin("jvm") version "LATEST_VERSION"
     id("com.google.devtools.ksp") version "LATEST_VERSION"
-    id("com.anthonycr.plugins.mezzanine") version "2.0.0"
+    id("com.anthonycr.plugins.mezzanine") version "2.0.1"
 }
 ```
 
