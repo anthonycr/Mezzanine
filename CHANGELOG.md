@@ -1,6 +1,10 @@
 Change Log
 ==========
 
+Version 2.0.1 *(2025-04-01)*
+----------------------------
+- Automatically apply Mezzanine Gradle dependencies when the Mezzanine plugin is applied.
+
 Version 2.0.0 *(2025-03-16)*
 ----------------------------
 - New Gradle plugin and Kotlin symbol processing architecture replaces old Java annotation processing design.
