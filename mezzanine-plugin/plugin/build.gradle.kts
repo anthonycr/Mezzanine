@@ -30,7 +30,7 @@ dependencies {
 }
 
 version = property("VERSION").toString()
-group = "com.anthonycr.mezzanine"
+group = property("GROUP").toString()
 
 gradlePlugin {
     website.set(property("WEBSITE").toString())
