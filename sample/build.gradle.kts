@@ -1,6 +1,3 @@
-import org.jetbrains.kotlin.gradle.dsl.JvmTarget
-import org.jetbrains.kotlin.gradle.dsl.KotlinVersion
-
 plugins {
     id("com.anthonycr.plugins.mezzanine")
     alias(libs.plugins.android.app)
@@ -42,6 +39,9 @@ mezzanine {
 }
 
 dependencies {
+    ksp(project(":mezzanine:processor"))
+    implementation(project(":mezzanine:core"))
+
     implementation(platform(libs.androidx.compose.bom))
     implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.ui.tooling.preview)
