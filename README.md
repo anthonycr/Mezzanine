@@ -16,7 +16,7 @@ To your application's `build.gradle.kts`, you must apply the Kotlin plugin, the 
 plugins {
     kotlin("jvm") version "LATEST_VERSION"
     id("com.google.devtools.ksp") version "LATEST_VERSION"
-    id("com.anthonycr.plugins.mezzanine") version "2.0.1"
+    id("com.anthonycr.plugins.mezzanine") version "2.0.2"
 }
 ```
 
@@ -24,8 +24,8 @@ Then add the build dependencies to the `dependencies` block.
 
 ```kotlin
 dependencies {
-    implementation("com.anthonycr.mezzanine:core:2.0.1")
-    ksp("com.anthonycr.mezzanine:processor:2.0.1")
+    implementation("com.anthonycr.mezzanine:core:2.0.2")
+    ksp("com.anthonycr.mezzanine:processor:2.0.2")
 }
 ```
 

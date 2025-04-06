@@ -1,6 +1,10 @@
 Change Log
 ==========
 
+Version 2.0.2 *(2025-04-06)*
+----------------------------
+- Change back Mezzanine Gradle dependency application to manual due to edge cases with KSP plugin application.
+
 Version 2.0.1 *(2025-04-01)*
 ----------------------------
 - Automatically apply Mezzanine Gradle dependencies when the Mezzanine plugin is applied.
