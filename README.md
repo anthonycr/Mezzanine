@@ -24,8 +24,8 @@ Then add the build dependencies to the `dependencies` block.
 
 ```kotlin
 dependencies {
-    implementation(project(":mezzanine:core"))
-    ksp(project(":mezzanine:processor"))
+    implementation("com.anthonycr.mezzanine:core:2.0.1")
+    ksp("com.anthonycr.mezzanine:processor:2.0.1")
 }
 ```
 

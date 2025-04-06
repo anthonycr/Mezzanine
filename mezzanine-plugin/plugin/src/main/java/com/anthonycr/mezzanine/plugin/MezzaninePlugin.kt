@@ -37,10 +37,4 @@ class MezzaninePlugin : Plugin<Project> {
             }
         }
     }
-
-    companion object {
-        private const val CORE_COORDINATES = "com.anthonycr.mezzanine:core"
-        private const val PROCESSOR_COORDINATES = "com.anthonycr.mezzanine:processor"
-        private const val MINIMUM_REQUIRED_VERSION = "2.0.1"
-    }
 }
