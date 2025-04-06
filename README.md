@@ -20,6 +20,15 @@ plugins {
 }
 ```
 
+Then add the build dependencies to the `dependencies` block.
+
+```kotlin
+dependencies {
+    implementation(project(":mezzanine:core"))
+    ksp(project(":mezzanine:processor"))
+}
+```
+
 Then setup the `mezzanine` extension to pass the file you want to be processed. You can pass as many files as comma separated paths as you need. The path should be relative to the project root.
 
 ```kotlin

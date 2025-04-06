@@ -14,22 +14,6 @@ class MezzaninePlugin : Plugin<Project> {
 
         val mezzanineDirectory = target.layout.buildDirectory.dir("mezzanineGenerated")
 
-        val localCoreDependency = target.findProject(":mezzanine:core")
-        val localProcessorDependency = target.findProject(":mezzanine:processor")
-
-        target.afterEvaluate {
-            target.dependencies.apply {
-                add(
-                    "implementation",
-                    localCoreDependency ?: "$CORE_COORDINATES:$MINIMUM_REQUIRED_VERSION"
-                )
-                add(
-                    "ksp",
-                    localProcessorDependency ?: "$PROCESSOR_COORDINATES:$MINIMUM_REQUIRED_VERSION"
-                )
-            }
-        }
-
         val generateMezzanine =
             target.tasks.register("generateMezzanine", GenerateMezzanineTask::class.java) { task ->
                 task.inputFiles.setFrom(extension.files)
