@@ -1,6 +1,11 @@
 Change Log
 ==========
 
+Version 2.1.0 *(2025-05-23)*
+----------------------------
+- Updated KotlinPoet to 2.2.0
+- Updated Kotlin to 2.1.21
+
 Version 2.0.2 *(2025-04-06)*
 ----------------------------
 - Change back Mezzanine Gradle dependency application to manual due to edge cases with KSP plugin application.
