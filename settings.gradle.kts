@@ -25,6 +25,7 @@ plugins {
 
 rootProject.name = "Mezzanine"
 include(":sample")
+include(":sample-library")
 include(":mezzanine:core")
 include(":mezzanine:internal")
 include(":mezzanine:processor")
