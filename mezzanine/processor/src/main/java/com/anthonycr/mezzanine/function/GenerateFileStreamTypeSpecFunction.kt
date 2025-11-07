@@ -9,6 +9,7 @@ import com.squareup.kotlinpoet.TypeSpec
 import com.squareup.kotlinpoet.asTypeName
 import com.squareup.kotlinpoet.ksp.addOriginatingKSFile
 import com.squareup.kotlinpoet.ksp.toClassName
+import kotlin.math.absoluteValue
 
 /**
  * Generates the [TypeSpec] for the interface represented by the [KSClassDeclaration] which returns
@@ -26,7 +27,7 @@ fun Pair<KSClassDeclaration, String>.asFileStreamImplementationTypeSpec(
         .addCode(
             CodeBlock.builder()
                 .addStatement(
-                    "return com.anthonycr.mezzanine.readFromMezzanine(%S)", path
+                    "return com.anthonycr.mezzanine._MezzanineReader_${path.hashCode().absoluteValue}.readFromMezzanine()"
                 ).build()
         )
         .build()

@@ -1,7 +1,7 @@
 plugins {
+    alias(libs.plugins.ksp.plugin)
     id("com.anthonycr.plugins.mezzanine")
     alias(libs.plugins.kotlin.jvm)
-    alias(libs.plugins.ksp.plugin)
 }
 
 kotlin {

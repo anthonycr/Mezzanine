@@ -1,8 +1,8 @@
 plugins {
+    alias(libs.plugins.ksp.plugin)
     id("com.anthonycr.plugins.mezzanine")
     alias(libs.plugins.android.app)
     alias(libs.plugins.kotlin.android)
-    alias(libs.plugins.ksp.plugin)
     alias(libs.plugins.compose.compiler)
 }
 
@@ -36,11 +36,13 @@ mezzanine {
     files = files(
         "src/main/assets/test.json"
     )
+    generateMezzanine = true
 }
 
 dependencies {
     ksp(project(":mezzanine:processor"))
     implementation(project(":mezzanine:core"))
+    implementation(project(":sample-library"))
 
     implementation(platform(libs.androidx.compose.bom))
     implementation(libs.androidx.activity.compose)

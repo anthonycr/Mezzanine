@@ -16,6 +16,7 @@ To your application's `build.gradle.kts`, you must apply the Kotlin plugin, the 
 plugins {
     kotlin("jvm") version "LATEST_VERSION"
     id("com.google.devtools.ksp") version "LATEST_VERSION"
+    // Mezzanine must be applied AFTER the KSP plugin
     id("com.anthonycr.plugins.mezzanine") version "2.1.0"
 }
 ```
@@ -30,6 +31,9 @@ dependencies {
 ```
 
 Then setup the `mezzanine` extension to pass the file you want to be processed. You can pass as many files as comma separated paths as you need. The path should be relative to the project root.
+
+Additionally, you will need to specify whether Mezzanine should generate the mezzanine function in this module or not, using the `generateMezzanine` property.
+Only one module can generate the mezzanine function. Usually, you would set this to `true` in your top level or application module. Defaults to `false`.
 
 ```kotlin
 mezzanine {
@@ -57,7 +61,7 @@ Then where you need to consume the file, obtain an instance of the file stream u
 ```kotlin
 import com.anthonycr.mezzanine.mezzanine
 
-val testJson = mezzanine<TestJson>()
+val testJson = mezzanine<TestJson>() // Alternatively, call the generated constructor _Mezzanine_TestJson()
 val fileContents = testJson.produce()
 ```
 
