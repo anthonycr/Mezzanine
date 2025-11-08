@@ -40,6 +40,7 @@ mezzanine {
     files = files(
         "src/main/assets/test.json"
     )
+    generateMezzanine = true
 }
 ```
 
