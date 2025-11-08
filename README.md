@@ -48,7 +48,7 @@ After the above has been added to the `build.gradle.kts`, a Kotlin interface mus
 
 The interface must
 - Have one function with no parameters and a return type of `String`.
-- Be annotated with `@FileStream(path)` where `path` is the same value passed in the extension setup in the `build.gradle.kts`.
+- Be annotated with `@FileStream(path)` where `path` is one of the values passed in the extension setup in the `build.gradle.kts`.
 
 ```kotlin
 @FileStream("src/main/assets/test.json")
