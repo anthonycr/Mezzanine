@@ -34,7 +34,7 @@ kotlin {
 
 mezzanine {
     files = files(
-        "src/main/assets/test.json"
+        "src/main/assets/test1.json"
     )
     generateMezzanine = true
 }

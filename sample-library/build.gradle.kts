@@ -10,7 +10,7 @@ kotlin {
 
 mezzanine {
     files = files(
-        "src/main/assets/test.txt"
+        "src/main/assets/test2.json"
     )
 }
 

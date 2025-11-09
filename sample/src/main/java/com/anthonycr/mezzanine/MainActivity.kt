@@ -16,7 +16,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.tooling.preview.Preview
-import com.anthonycr.mezzanine.library.TextReader
+import com.anthonycr.mezzanine.library.Test2Json
 
 class MainActivity : ComponentActivity() {
     @OptIn(ExperimentalMaterial3Api::class)
@@ -34,8 +34,8 @@ class MainActivity : ComponentActivity() {
                 }
             ) { innerPadding ->
                 Column {
-                    FileContent(modifier = Modifier.padding(innerPadding))
-                    TextContent(modifier = Modifier.padding(innerPadding))
+                    Test1JsonContent(modifier = Modifier.padding(innerPadding))
+                    Test2JsonContent(modifier = Modifier.padding(innerPadding))
                 }
             }
         }
@@ -43,20 +43,20 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun FileContent(modifier: Modifier = Modifier) {
-    val fileReader = mezzanine<FileReader>()
+fun Test1JsonContent(modifier: Modifier = Modifier) {
+    val test1Json = mezzanine<Test1Json>()
     Text(
-        text = fileReader.readInTestJsonFile(),
+        text = test1Json.readJson(),
         fontFamily = FontFamily.Monospace,
         modifier = modifier
     )
 }
 
 @Composable
-fun TextContent(modifier: Modifier = Modifier) {
-    val fileReader = mezzanine<TextReader>()
+fun Test2JsonContent(modifier: Modifier = Modifier) {
+    val fileReader = mezzanine<Test2Json>()
     Text(
-        text = fileReader.readTextFile(),
+        text = fileReader.readJson(),
         fontFamily = FontFamily.Monospace,
         modifier = modifier
     )
@@ -64,6 +64,12 @@ fun TextContent(modifier: Modifier = Modifier) {
 
 @Preview(showBackground = true)
 @Composable
-fun FileContentPreview() {
-    FileContent()
+fun Test1JsonContentPreview() {
+    Test1JsonContent()
+}
+
+@Preview(showBackground = true)
+@Composable
+fun Test2JsonContentPreview() {
+    Test2JsonContent()
 }
