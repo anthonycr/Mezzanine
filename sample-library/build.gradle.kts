@@ -1,6 +1,6 @@
 plugins {
-    alias(libs.plugins.ksp.plugin)
     id("com.anthonycr.plugins.mezzanine")
+    alias(libs.plugins.ksp.plugin)
     alias(libs.plugins.kotlin.jvm)
 }
 

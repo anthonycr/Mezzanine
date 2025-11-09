@@ -1,6 +1,6 @@
 plugins {
-    alias(libs.plugins.ksp.plugin)
     id("com.anthonycr.plugins.mezzanine")
+    alias(libs.plugins.ksp.plugin)
     alias(libs.plugins.android.app)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.compose.compiler)
