@@ -1,6 +1,14 @@
 Change Log
 ==========
 
+Version 2.2.0 *(2025-11-17)*
+----------------------------
+- Multi-module support through allowing consumers to control which module the `mezzanine` function is generated in.
+- Adds `generateMezzanine` property to Gradle extension, defaults to `true` for backwards compatibility.
+- For consumers with mezzanine usage isolated to one module, nothing changes.
+- Updated Kotlin to 2.2.21
+- Updated KSP to 2.3.2
+
 Version 2.1.0 *(2025-05-23)*
 ----------------------------
 - Updated KotlinPoet to 2.2.0
