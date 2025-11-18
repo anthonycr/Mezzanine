@@ -31,11 +31,15 @@ dependencies {
 
 Then setup the `mezzanine` extension to pass the file you want to be processed. You can pass as many files as comma separated paths as you need. The path should be relative to the project root.
 
+Additionally, you will need to specify whether Mezzanine should generate the mezzanine function in this module or not, using the `generateMezzanine` property.
+Only one module can generate the mezzanine function. Usually, you would set this to `true` in your top level or application module and `false` in your other modules. Defaults to `true`.
+
 ```kotlin
 mezzanine {
     files = files(
         "src/main/assets/test.json"
     )
+    generateMezzanine = true
 }
 ```
 
@@ -43,7 +47,7 @@ After the above has been added to the `build.gradle.kts`, a Kotlin interface mus
 
 The interface must
 - Have one function with no parameters and a return type of `String`.
-- Be annotated with `@FileStream(path)` where `path` is the same value passed in the extension setup in the `build.gradle.kts`.
+- Be annotated with `@FileStream(path)` where `path` is one of the values passed in the extension setup in the `build.gradle.kts`.
 
 ```kotlin
 @FileStream("src/main/assets/test.json")
@@ -57,7 +61,7 @@ Then where you need to consume the file, obtain an instance of the file stream u
 ```kotlin
 import com.anthonycr.mezzanine.mezzanine
 
-val testJson = mezzanine<TestJson>()
+val testJson = mezzanine<TestJson>() // Alternatively, call the generated constructor _Mezzanine_TestJson()
 val fileContents = testJson.produce()
 ```
 

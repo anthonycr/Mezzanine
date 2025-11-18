@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -15,6 +16,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.tooling.preview.Preview
+import com.anthonycr.mezzanine.library.Test2Json
 
 class MainActivity : ComponentActivity() {
     @OptIn(ExperimentalMaterial3Api::class)
@@ -31,17 +33,30 @@ class MainActivity : ComponentActivity() {
                     )
                 }
             ) { innerPadding ->
-                FileContent(modifier = Modifier.padding(innerPadding))
+                Column {
+                    Test1JsonContent(modifier = Modifier.padding(innerPadding))
+                    Test2JsonContent(modifier = Modifier.padding(innerPadding))
+                }
             }
         }
     }
 }
 
 @Composable
-fun FileContent(modifier: Modifier = Modifier) {
-    val fileReader = mezzanine<FileReader>()
+fun Test1JsonContent(modifier: Modifier = Modifier) {
+    val test1Json = mezzanine<Test1Json>()
     Text(
-        text = fileReader.readInTestJsonFile(),
+        text = test1Json.readJson(),
+        fontFamily = FontFamily.Monospace,
+        modifier = modifier
+    )
+}
+
+@Composable
+fun Test2JsonContent(modifier: Modifier = Modifier) {
+    val fileReader = mezzanine<Test2Json>()
+    Text(
+        text = fileReader.readJson(),
         fontFamily = FontFamily.Monospace,
         modifier = modifier
     )
@@ -49,6 +64,12 @@ fun FileContent(modifier: Modifier = Modifier) {
 
 @Preview(showBackground = true)
 @Composable
-fun FileContentPreview() {
-    FileContent()
+fun Test1JsonContentPreview() {
+    Test1JsonContent()
+}
+
+@Preview(showBackground = true)
+@Composable
+fun Test2JsonContentPreview() {
+    Test2JsonContent()
 }

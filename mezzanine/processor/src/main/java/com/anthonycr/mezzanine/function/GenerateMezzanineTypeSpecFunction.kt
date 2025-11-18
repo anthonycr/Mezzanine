@@ -8,11 +8,12 @@ import com.squareup.kotlinpoet.ParameterizedTypeName.Companion.parameterizedBy
 import com.squareup.kotlinpoet.TypeSpec
 import com.squareup.kotlinpoet.TypeVariableName
 import com.squareup.kotlinpoet.ksp.addOriginatingKSFile
+import com.squareup.kotlinpoet.ksp.toClassName
 
 /**
  * Generates the Mezzanine [TypeSpec] from a list of [TypeSpec].
  */
-fun List<Pair<KSClassDeclaration, TypeSpec>>.asAggregatedMezzanineGeneratorFileSpec(): List<FileSpec> {
+fun Sequence<KSClassDeclaration>.asAggregatedMezzanineGeneratorFileSpec(): FileSpec {
     val mezzanineInternalSpec = FileSpec.builder(PACKAGE_NAME, CLASS_NAME)
         .addFunction(
             FunSpec.builder("mezzanineInternal")
@@ -24,11 +25,13 @@ fun List<Pair<KSClassDeclaration, TypeSpec>>.asAggregatedMezzanineGeneratorFileS
                 .returns(TypeVariableName("T"))
                 .beginControlFlow("return when(clazz.canonicalName)")
                 .apply {
-                    forEach { (interfaceDeclaration, implementationTypeSpec) ->
-                        addOriginatingKSFile(interfaceDeclaration.containingFile!!)
+                    forEach { implementationDeclaration ->
+                        val interfaceName =
+                            implementationDeclaration.superTypes.first().resolve().toClassName()
+                        implementationDeclaration.containingFile?.let { addOriginatingKSFile(it) }
 
-                        val className = "$PACKAGE_NAME.${implementationTypeSpec.name!!}"
-                        addStatement("\"${interfaceDeclaration.qualifiedName!!.asString()}\" -> clazz.cast(${className}())!!")
+                        val className = interfaceName.canonicalName
+                        addStatement("\"${className}\" -> clazz.cast(${implementationDeclaration.qualifiedName!!.asString()}())!!")
                     }
                     addStatement("else -> error(\"Unsupported type \$clazz\")")
                 }
@@ -37,13 +40,16 @@ fun List<Pair<KSClassDeclaration, TypeSpec>>.asAggregatedMezzanineGeneratorFileS
         )
         .build()
 
-    return map { (_, implementationTypeSpec) ->
+    return mezzanineInternalSpec
+}
+
+fun List<Pair<KSClassDeclaration, TypeSpec>>.asFileSpecs(): List<FileSpec> =
+    map { (_, implementationTypeSpec) ->
         FileSpec.builder(
             PACKAGE_NAME,
             implementationTypeSpec.name!!
         ).addType(implementationTypeSpec).build()
-    } + mezzanineInternalSpec
-}
+    }
 
 private const val PACKAGE_NAME = "com.anthonycr.mezzanine"
 private const val CLASS_NAME = "MezzanineInternal"
