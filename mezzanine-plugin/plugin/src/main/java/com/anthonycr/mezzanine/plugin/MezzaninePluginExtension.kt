@@ -14,10 +14,13 @@ abstract class MezzaninePluginExtension @Inject constructor(project: Project) {
     /**
      * `true` if Mezzanine should generate the `mezzanine` function in this module, `false`
      * otherwise. Note: You can only have one module generate a mezzanine function, the rest of your
-     * modules can only generate the file readers. For single module projects, you don't need this,
-     * for multi-module projects, set this to true for your top level module.
+     * modules can only generate the file readers. For single module projects, you don't need to
+     * worry about this, for multi-module projects, set this to `true` for your top level app module
+     * and `false` for the other modules.
+     *
+     * Defaults to `true`.
      */
     val generateMezzanine: Property<Boolean> = project.objects.property(Boolean::class.java).apply {
-        convention(false)
+        convention(true)
     }
 }

@@ -32,7 +32,7 @@ dependencies {
 Then setup the `mezzanine` extension to pass the file you want to be processed. You can pass as many files as comma separated paths as you need. The path should be relative to the project root.
 
 Additionally, you will need to specify whether Mezzanine should generate the mezzanine function in this module or not, using the `generateMezzanine` property.
-Only one module can generate the mezzanine function. Usually, you would set this to `true` in your top level or application module. Defaults to `false`.
+Only one module can generate the mezzanine function. Usually, you would set this to `true` in your top level or application module and `false` in your other modules. Defaults to `true`.
 
 ```kotlin
 mezzanine {

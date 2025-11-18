@@ -12,6 +12,7 @@ mezzanine {
     files = files(
         "src/main/assets/test2.json"
     )
+    generateMezzanine = false
 }
 
 dependencies {
