@@ -6,7 +6,7 @@ ksp = "2.3.4"
 kotlinpoet = "2.2.0"
 jvm = "17"
 activityCompose = "1.12.2"
-composeBom = "2025.12.01"
+composeBom = "2026.01.00"
 
 [libraries]
 androidx-activity-compose = { group = "androidx.activity", name = "activity-compose", version.ref = "activityCompose" }
