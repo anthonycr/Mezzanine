@@ -23,7 +23,7 @@ kotlinpoet-ksp = { group = "com.squareup", name = "kotlinpoet-ksp", version.ref 
 ksp-api = { group = "com.google.devtools.ksp", name = "symbol-processing-api", version.ref = "ksp" }
 ksp-processor = { group = "com.google.devtools.ksp", name = "symbol-processing-gradle-plugin", version.ref = "ksp" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
-assertj = { group = "org.assertj", name = "assertj-core", version = "3.27.6" }
+assertj = { group = "org.assertj", name = "assertj-core", version = "3.27.7" }
 
 [plugins]
 android-app = { id = "com.android.application", version.ref = "agp" }
