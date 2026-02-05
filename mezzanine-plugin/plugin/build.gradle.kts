@@ -21,6 +21,7 @@ java {
 }
 
 dependencies {
+    compileOnly(libs.android)
     implementation(gradleApi())
     implementation(libs.commons.text)
     implementation(libs.kotlin)
