@@ -9,6 +9,7 @@ activityCompose = "1.12.3"
 composeBom = "2026.01.01"
 
 [libraries]
+android = { group = "com.android.tools.build", name = "gradle-api", version.ref = "agp" }
 androidx-activity-compose = { group = "androidx.activity", name = "activity-compose", version.ref = "activityCompose" }
 androidx-compose-bom = { group = "androidx.compose", name = "compose-bom", version.ref = "composeBom" }
 androidx-ui-tooling = { group = "androidx.compose.ui", name = "ui-tooling" }
@@ -29,7 +30,6 @@ assertj = { group = "org.assertj", name = "assertj-core", version = "3.27.7" }
 android-app = { id = "com.android.application", version.ref = "agp" }
 compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 gradle-publish = { id = "com.gradle.plugin-publish", version = "2.0.0" }
-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
 ksp-plugin = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 maven-publish = { id = "com.vanniktech.maven.publish", version = "0.36.0" }
