@@ -1,6 +1,12 @@
 Change Log
 ==========
 
+Version 2.3.0 *(2026-02-04)*
+----------------------------
+- Updated to support Android Gradle Plugin 9.0.0
+- Updated Kotlin to 2.3.0
+- Updated KSP to 2.3.5
+
 Version 2.2.0 *(2025-11-17)*
 ----------------------------
 - Multi-module support through allowing consumers to control which module the `mezzanine` function is generated in.
