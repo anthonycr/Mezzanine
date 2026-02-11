@@ -6,7 +6,7 @@ ksp = "2.3.5"
 kotlinpoet = "2.2.0"
 jvm = "17"
 activityCompose = "1.12.4"
-composeBom = "2026.01.01"
+composeBom = "2026.02.00"
 
 [libraries]
 android = { group = "com.android.tools.build", name = "gradle-api", version.ref = "agp" }
