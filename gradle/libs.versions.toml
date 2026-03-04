@@ -29,7 +29,7 @@ assertj = { group = "org.assertj", name = "assertj-core", version = "3.27.7" }
 [plugins]
 android-app = { id = "com.android.application", version.ref = "agp" }
 compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
-gradle-publish = { id = "com.gradle.plugin-publish", version = "2.0.0" }
+gradle-publish = { id = "com.gradle.plugin-publish", version = "2.1.0" }
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
 ksp-plugin = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 maven-publish = { id = "com.vanniktech.maven.publish", version = "0.36.0" }
