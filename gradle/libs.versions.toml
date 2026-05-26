@@ -2,7 +2,7 @@
 agp = "9.2.1"
 kotlin = "2.3.21"
 junit = "4.13.2"
-ksp = "2.3.8"
+ksp = "2.3.9"
 kotlinpoet = "2.3.0"
 jvm = "17"
 activityCompose = "1.13.0"
