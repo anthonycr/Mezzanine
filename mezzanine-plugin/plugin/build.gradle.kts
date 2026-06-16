@@ -1,3 +1,4 @@
+import org.gradle.plugin.compatibility.compatibility
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.dsl.KotlinVersion
 
@@ -53,6 +54,11 @@ gradlePlugin {
                     "resources",
                 )
             )
+            compatibility {
+                features {
+                    configurationCache = true
+                }
+            }
         }
     }
 }
