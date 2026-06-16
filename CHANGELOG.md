@@ -1,6 +1,12 @@
 Change Log
 ==========
 
+Version 2.4.0 *(2026-06-16)*
+----------------------------
+- Updated to support Android Gradle Plugin 9.2.1
+- Updated Kotlin to 2.4.0
+- Updated KSP to 2.3.9
+
 Version 2.3.0 *(2026-02-04)*
 ----------------------------
 - Updated to support Android Gradle Plugin 9.0.0
