@@ -1,6 +1,13 @@
 Change Log
 ==========
 
+Version 2.5.0 *(2026-08-04)*
+----------------------------
+- Fixed incompatibility with Windows OS.
+- Updated to support Android Gradle Plugin 9.3.1
+- Updated Kotlin to 2.4.10
+- Updated KSP to 2.3.11
+
 Version 2.4.0 *(2026-06-16)*
 ----------------------------
 - Updated to support Android Gradle Plugin 9.2.1
