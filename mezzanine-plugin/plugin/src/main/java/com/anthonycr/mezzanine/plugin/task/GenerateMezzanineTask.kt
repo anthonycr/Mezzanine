@@ -35,7 +35,7 @@ abstract class GenerateMezzanineTask : DefaultTask() {
     fun run() {
         val projectPath = relativePath.get()
         inputFiles.forEach { file ->
-            val fileRelativePath = file.path.substring(projectPath.length + 1)
+            val fileRelativePath = file.invariantSeparatorsPath.substring(projectPath.length + 1)
             val className = "_MezzanineReader_${fileRelativePath.hashCode().absoluteValue}"
             val text = file.readText()
             val escapedText = StringEscapeUtils.escapeJava(text).replace("$", "\\$")
