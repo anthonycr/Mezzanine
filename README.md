@@ -65,6 +65,21 @@ val testJson = mezzanine<TestJson>() // Alternatively, call the generated constr
 val fileContents = testJson.produce()
 ```
 
+## Building Cross-Platform
+
+By default, Git checks out files in a repo using the platform default EOL character. This can result
+in Mezzanine seeing different file contents when building on Unix based systems or Windows systems.
+While this might not affect the functionality of the project, if you have assertions based around 
+the output or require that the files being read have a specific formatting, it is recommended that
+you set the EOL character explicitly in `.gitattributes` for the files you have Mezzanine read. For 
+example, in this project, the files we are reading are all JSON files, so the contents of our
+`.gitattributes` are as follows (so that we can support building on both Unix and Windows based 
+systems).
+
+```
+*.json text eol=lf
+```
+
 ## Additional Considerations
 - Files are assumed to be encoded as `UTF-8`.
 - Files must be less than `65kB`, otherwise compilation will fail.
