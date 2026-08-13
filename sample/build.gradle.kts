@@ -7,12 +7,13 @@ plugins {
 
 android {
     namespace = "com.anthonycr.mezzanine"
-    compileSdk = 36
+    compileSdk = 37
+    compileSdkMinor = 1
 
     defaultConfig {
         applicationId = "com.anthonycr.mezzanine"
         minSdk = 24
-        targetSdk = 36
+        targetSdk = 37
         versionCode = 1
         versionName = "1.0"
     }
